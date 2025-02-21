@@ -1,0 +1,194 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <style>
+        .trip{
+            background-color:white;
+            color:black;
+            border:3px solid green;
+            width:80px;
+            height:50px;
+        }
+        .btn-row{
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+        }
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            table-layout: auto;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .hide-button {
+            visibility: hidden;
+        }
+    </style>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Trip Updates</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="frdate"><b>Date From</b></label>
+                                    <input type="date" class="form-control" name="frdate" id="frdate" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="todate"><b>Date To</b></label>
+                                    <input type="date" class="form-control" name="todate" id="todate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="code"><b>Truck No</b></label>
+                                    <select class="form-control" name="code" id="code">
+                                        <option>----------------------------------Select---------------------------------------</option>
+                                        {% for code in code %}
+                                        <option>{{ code.code}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card-action">
+                                <button type="submit" name="ser1" class="btn btn-primary">
+                                    Search &nbsp;
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+
+                        {% if ser1 %}
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Trip Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="height: 600px; overflow-y: auto;">
+                                <table class=" table table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" style="text-align:center;" >Actions</th>
+                                            <th>Sl No</th>
+                                            <th>Date</th>
+                                            <th>Truck No</th>
+                                            <th>Feet</th>
+                                            <th>Driver</th>
+                                            <th>Trans</th>
+                                            <th>Party</th>
+                                            <th>Place</th>
+                                            <th>Type</th>
+                                            <th>Container</th>
+                                            <th>Hire</th>
+                                            <th>Halt</th>
+                                            <th>Diesel</th>
+                                            <th>Diesel Qnt</th>
+                                            <th>Bill No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in ser1 %}
+                                        <tr>
+                                            <td>
+                                                <div class="btn-row">
+                                                    <a href="{% url 'isaup' data.trip.id %}" >
+                                                        <button type="button" class="trip">Trip</button>
+                                                    </a>
+                                                    {% if data.trip.battaid > 0 %}
+                                                        <button type="button" class="trip hide-button" disabled>Batta exists</button>
+                                                    {% else %}
+                                                        <a href="{% url 'batta' data.trip.id %}" >
+                                                            <button type="button" class="trip">Batta</button>
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if data.trip.expid > 0 %}
+                                                        <button type="button" class="trip" disabled>Expense Exists</button>
+                                                    {% else %}
+                                                        <a href="{% url 'expense' data.trip.id %}" >
+                                                            <button type="button" class="trip">Expense</button>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'isadel' data.trip.id %}" >
+                                                    <button type="button" class="btn btn-link btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{data.trip.dat}}</td>
+                                            <td>{{data.trip.code}}</td>
+                                            <td>{{data.trip.code.feet}}</td>
+                                            <td>{{data.trip.driver.driver}}</td>
+                                            <td>{{data.trip.code.trans}}</td>
+                                            <td>{{data.trip.party}}</td>
+                                            <td>{{data.trip.place}}</td>
+                                            <td>{{data.trip.trip}}</td>
+                                            <td>{{data.trip.cont}}</td>
+                                            <td>{{data.trip.hire}}</td>
+                                            <td>{{data.trip.halt}}</td>
+                                            <td>{{data.trip.dis}}</td>
+                                            <td>{{data.trip.disqnt}}</td>
+                                            <td>{{data.trip.bno}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="9"></th>
+                                            <th>TOTAL</th>
+                                            <th colspan="2"></th>
+                                            <th>{{hire}}</th>
+                                            <th>{{halt}}</th>
+                                            <th>{{diesel}}</th>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home"></li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header"></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                          <h3 class="fw-bold mb-3">Batta</h3>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="code"><b>Truck No</b></label>
+                                <input type="text" readonly value="{{trip.code}}" class="form-control" name="code"id="code">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="date"><b>Date</b></label>
+                                <input type="date" readonly value="{{trip.dat}}" class="form-control" name="date"id="date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="cont"><b>Container No</b></label>
+                                <input type="text" class="form-control" name="cont" id="cont" value="{{trip.cont}}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Driver</b></label>
+                                <select class="form-control" name="driver"id="driver">
+                                    <option>{{trip.driver}}</option>
+                                    {% for driver in driver %}
+                                    <option >{{driver.driver}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sheetno"><b>Tripsheet No  <span style="color: red;">*</span></b></label>
+                                <input type="number" class="form-control" name="sheetno" id="sheetno" required/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="opkm"><b>Opening KM  <span style="color: red;">*</span></b></label>
+                                <input type="number" class="form-control" name="opkm" id="opkm" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="clkm"><b>Closing KM  <span style="color: red;">*</span></b></label>
+                                <input type="number" class="form-control" name="clkm" id="clkm" required/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="batta"><b>Batta  <span style="color: red;">*</span></b></label>
+                                <input type="number" class="form-control" name="batta"id="batta" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="lift"><b>Lift  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="lift"id="lift" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="print"><b>Print  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="print" id="print" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="othexp"><b>Other Expenses <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="othexp" id="othexp" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="wei"><b>WEI  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="wei" id="wei" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="halt"><b>Halt  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="halt" id="halt" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="park"><b>Park  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control"  name="park" id="park" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="rto"><b>RTO  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="rto" id="rto" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="adv"><b>Advance  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control"  name="adv" id="adv" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="loan"><b>Loan  <span style="color: red;">*</span></b></label>
+                                <input type="number" value="0" class="form-control" name="loan" id="loan" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="card-action">
+                            <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="bill" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

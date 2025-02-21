@@ -1,0 +1,147 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Update Expense</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Truck No</b></label>
+                    <input type="text" readonly class="form-control" value="{{code.code}}" name="code" id="code" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="date"><b>Date</b></label>
+                    <input type="date" readonly class="form-control" value="{{code.date}}" name="date" id="date" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="roro"><b>Roro</b></label>
+                    <input type="number" class="form-control" value="{{code.roro}}" name="roro" id="roro">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adblue"><b>Adblue</b></label>
+                    <input type="number" class="form-control" name="adblue" value="{{code.adblue}}" id="adblue">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="oil"><b>Oil</b></label>
+                    <input type="number" class="form-control" value="{{code.oil}}" name="oil" id="oil">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="insur"><b>Insurance</b></label>
+                    <input type="number" class="form-control" name="insur" value="{{code.insur}}" id="insur">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="tax"><b>Tax</b></label>
+                    <input type="number" class="form-control" value="{{code.tax}}" name="tax" id="tax">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="emi"><b>EMI</b></label>
+                    <input type="number" class="form-control" name="emi" value="{{code.emi}}" id="emi">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="test"><b>Test Work</b></label>
+                    <input type="number" class="form-control" value="{{code.test}}" name="test" id="test">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="work"><b>Work Type</b></label>
+                    <input type="number" class="form-control" name="work" value="{{code.work}}" id="work">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="spare"><b>Spare Rate</b></label>
+                    <input type="number" class="form-control" value="{{code.spare}}" name="spare" id="spare">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="workshop"><b>Workshop</b></label>
+                    <input type="number" class="form-control" readonly name="workshop" value="{{code.workshop}}" id="workshop">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="rethread"><b>Rethread</b></label>
+                    <input type="number" class="form-control" value="{{code.rethread}}" name="rethread" id="rethread">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="tyre"><b>New Tyre</b></label>
+                    <input type="number" class="form-control" name="tyre" value="{{code.tyre}}" id="tyre">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="toll"><b>Toll</b></label>
+                    <input type="number" class="form-control" value="{{code.toll}}" name="toll" id="toll">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="park"><b>Park</b></label>
+                    <input type="number" class="form-control" value="{{code.park}}" name="park" id="park">
+                  </div>
+                </div>
+              </div>
+
+                <div class="card-action">
+                  <button type="submit" name="ser1" class="btn btn-success">Update</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,67 @@
+<table class=" table table-striped ">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Truck No</td>
+            <td>Feet</td>
+            <td>Driver</td>
+            <td>Trans</td>
+            <td>Party</td>
+            <td>Place</td>
+            <td>Type</td>
+            <td>Container</td>
+            <td>Hire</td>
+            <td>Halt</td>
+            <td>Diesel</td>
+            <td>Diesel Qnt</td>
+            <td>Bill No</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in trip %}
+        <tr>
+            <td>{{data.trip.dat}}</td>
+            <td>{{data.trip.code}}</td>
+            <td>{{data.trip.code.feet}}</td>
+            <td>{{data.trip.driver.driver}}</td>
+            <td>{{data.trip.code.trans}}</td>
+            <td>{{data.trip.party}}</td>
+            <td>{{data.trip.place}}</td>
+            <td>{{data.trip.trip}}</td>
+            <td>{{data.trip.cont}}</td>
+            <td>{{data.trip.hire}}</td>
+            <td>{{data.trip.halt}}</td>
+            <td>{{data.trip.dis}}</td>
+            <td>{{data.trip.disqnt}}</td>
+            <td>{{data.trip.bno}}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{hire}}</td>
+            <td>{{halt}}</td>
+            <td>{{diesel}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total of hire and halt</td>
+            <td colspan="2" class="text-center">{{ total }}</td>
+        </tr>
+    </tbody>
+</table>

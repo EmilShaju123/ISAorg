@@ -1,0 +1,78 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+
+<form method="post" action="{% url 'billorder' %}">
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header"></div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-4">
+                                            <h3 class="fw-bold mb-3">Trip View</h3>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="display table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Code</th>
+                                                    <th>Date</th>
+                                                    <th>Party</th>
+                                                    <th>Place</th>
+                                                    <th>Trip</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for trip in trips %}
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                {% if trip.checked %}
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input"  checked="checked" type="checkbox" value="{{trip.code}}" name="boxes">
+                                                                </div>
+                                                                {% else %}
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="{{trip.code}}" name="boxes">
+                                                                </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </td>
+                                                        <td><input class="form-control" name="code" value="{{trip.code}}"></td>
+                                                        <td><input class="form-control" name="dat" value="{{trip.dat}}"></td>
+                                                        <td><input class="form-control" name="party" value="{{trip.party}}"></td>
+                                                        <td><input class="form-control" name="place" value="{{trip.place}}"></td>
+                                                        <td><input class="form-control" name="trip" value="{{trip.trip}}"></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <button type="submit" name="gen" class="btn btn-success">Generate Bill</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

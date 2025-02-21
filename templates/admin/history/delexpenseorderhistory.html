@@ -1,0 +1,116 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+{% if error %}
+<p style="color: red">{{ error }}</p>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    <style>
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Expense History</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="height: 500px; overflow-y: auto;">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Expense Date</th>
+                                            <th>Created By</th>
+                                            <th>Created At</th>
+                                            <th>Updated By</th>
+                                            <th>History date</th>
+                                            <th>Last Updated</th>
+                                            <th>Deleted By</th>
+                                            <th>RORO</th>
+                                            <th>Adblue</th>
+                                            <th>Oil</th>
+                                            <th>Park</th>
+                                            <th>Insurance</th>
+                                            <th>Tax</th>
+                                            <th>EMI</th>
+                                            <th>Test Work</th>
+                                            <th>AIR/ GREESE/TYRE</th>
+                                            <th>Spare Rate</th>
+                                            <th>Workshop</th>
+                                            <th>Rethread</th>
+                                            <th>New Tyre</th>
+                                            <th>Toll</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for record in history %}
+                                    <tr>
+                                        <td>{{ record.date }}</td>
+                                        <td>{{ record.created_by }}</td>
+                                        <td>{{ record.created_at }}</td>
+                                        <td>{{ record.updated_by }}</td>
+                                        <td>{{ record.history_date }}</td>
+                                        <td>{{ record.updated_at }}</td>
+                                        <td>{{ record.deleted_by }}</td>
+                                        <td>{{ record.roro }}</td>
+                                        <td>{{ record.adblue }}</td>
+                                        <td>{{ record.oil }}</td>
+                                        <td>{{ record.park }}</td>
+                                        <td>{{ record.insur }}</td>
+                                        <td>{{ record.tax }}</td>
+                                        <td>{{ record.emi }}</td>
+                                        <td>{{ record.test }}</td>
+                                        <td>{{ record.work }}</td>
+                                        <td>{{ record.spare }}</td>
+                                        <td>{{ record.workshop }}</td>
+                                        <td>{{ record.rethread }}</td>
+                                        <td>{{ record.tyre }}</td>
+                                        <td>{{ record.toll}}</td>
+                                        <td>{{ record.total }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %}
+{% endblock %}

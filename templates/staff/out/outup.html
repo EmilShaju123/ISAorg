@@ -1,0 +1,146 @@
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home"></li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <h3 class="fw-bold mb-3">Update Trip</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="code"><b>Truck No</b></label>
+                                            <input type="text" readonly class="form-control" value="{{code.code}}" name="code" id="code" />
+                                        </div>
+                                    </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="date"><b>Date</b></label>
+                                        <input type="date" readonly class="form-control" value="{{code.dat}}" name="date" id="date" />
+                                    </div>
+                                </div>
+                            </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="party"><b>Party</b></label>
+                                <select class="form-control" name="party"id="party">
+                                    <option>{{code.party}}</option>
+                                    {% for i in party %}
+                                    <option>{{i.party}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="place"><b>Place</b></label>
+                                <select class="form-control" name="place"id="place">
+                                    <option>{{code.place}}</option>
+                                    {% for i in place %}
+                                    <option>{{i.place}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="dis"><b>Diesel Advance</b></label>
+                                <input type="number" value="{{code.dis}}" class="form-control" step="0.01" name="dis"id="dis">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="disqnt"><b>Diesel Qnt</b></label>
+                                <input type="number" value="{{code.disqnt}}"class="form-control" step="0.01" name="disqnt"id="disqnt">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="trip"><b>Type</b></label>
+                                <select class="form-control" name="trip"id="trip">
+                                    <option>{{code.trip}}</option>
+                                    {% for i in type %}
+                                    <option>{{i.trip}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="hire"><b>Hire</b></label>
+                                <input type="number" value="{{code.hire}}" class="form-control"  name="hire"id="hire">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="halt"><b>Halt</b></label>
+                                <input type="number" value="{{code.halt}}" class="form-control"  name="halt"id="halt">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="cont"><b>Container</b></label>
+                                <input type="text" value="{{code.cont}}" class="form-control"  name="cont"id="cont">
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="buy"><b>Buy</b></label>
+                                <input type="number" value="{{code.buy}}" class="form-control"  name="buy"id="buy">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="outadv"><b>Advance</b></label>
+                                <input type="number" value="{{code.outadv}}" class="form-control"  name="outadv"id="outadv">
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="card-action">
+                            <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="update" class="btn btn-success">Update</button>
+                                </div>
+                            </div>
+
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

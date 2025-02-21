@@ -1,0 +1,167 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <style>
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            table-layout: auto;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Batta Report</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="frdate"><b>Date From</b></label>
+                    <input type="date" class="form-control" name="frdate" id="frdate" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="todate"><b>Date To</b></label>
+                    <input type="date" class="form-control" name="todate" id="todate" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Truck No</b></label>
+                    <select class="form-control" name="code" id="code" >
+                        <option>--------------------Select-------------------</option>
+                        {% for code in code %}
+                        <option>{{code}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="driver"><b>Driver</b></label>
+                    <select class="form-control" name="driver" id="driver" >
+                        <option>--------------------Select-------------------</option>
+                        {% for driver in driver %}
+                        <option>{{driver}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+                <div class="card-action">
+                  <button type="submit" name="ser1" class="btn btn-success">
+                    Search &nbsp;
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button type="submit" name="export" class="btn btn-primary">Export</button>
+                </div>
+
+              {% if ser1 %}
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Batta Details</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive" style="height: 600px; overflow-y: auto;">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Sl No</th>
+                        <th>Date</th>
+                        <th>Driver</th>
+                        <th>Truck No</th>
+                        <th>Tripsheet No</th>
+                        <th>Batta</th>
+                        <th>Lift</th>
+                        <th>Print</th>
+                        <th>Other Exp</th>
+                        <th>WEI</th>
+                        <th>Halt</th>
+                        <th>Park</th>
+                        <th>RTO</th>
+                        <th>Advance</th>
+                        <th>Loan</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for data in ser1 %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ data.date }}</td>
+                        <td>{{ data.driver }}</td>
+                        <td>{{ data.code }}</td>
+                        <td>{{ data.sheetno }}</td>
+                        <td>{{ data.batta }}</td>
+                        <td>{{ data.lift }}</td>
+                        <td>{{ data.print }}</td>
+                        <td>{{ data.othexp }}</td>
+                        <td>{{ data.wei }}</td>
+                        <td>{{ data.halt }}</td>
+                        <td>{{ data.park }}</td>
+                        <td>{{ data.rto }}</td>
+                        <td>{{ data.adv }}</td>
+                        <td>{{ data.loan }}</td>
+                        <td>{{ data.total}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <td colspan="4"></td>
+                      <th>TOTAL</th>
+                      <th>{{total.batta}}</th>
+                      <th>{{total.lift}}</th>
+                      <th>{{total.print}}</th>
+                      <th>{{total.othexp}}</th>
+                      <th>{{total.wei}}</th>
+                      <th>{{total.halt}}</th>
+                      <th>{{total.park}}</th>
+                      <th>{{total.rto}}</th>
+                      <th>{{total.adv}}</th>
+                      <th>{{total.loan}}</th>
+                      <th>{{total.total}}</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

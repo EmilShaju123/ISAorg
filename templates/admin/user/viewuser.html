@@ -1,0 +1,88 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <style>
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            table-layout: auto;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Users</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive" style="height: 600px; overflow-y: auto;">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                          <th>Sl No</th>
+                        <th>username</th>
+                        <th>Date Joined</th>
+                        <th>Last Logged In</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for data in users %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ data.username }}</td>
+                          <td>{{ data.date_joined }}</td>
+                          <td>{{ data.last_login }}</td>
+                        <td>
+                          <a href="{% url 'userdel'  data.username %}">
+                            <button type="button" class="btn btn-link btn-danger">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

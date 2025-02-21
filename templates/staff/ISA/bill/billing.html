@@ -1,0 +1,79 @@
+
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator">
+              <i class="icon-arrow-right"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Billing</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="display table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>SL NO</th>
+                        <th>Code</th>
+                        <th>Date</th>
+                        <th>Party</th>
+                        <th>Place</th>
+                        <th>Trip</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for trip in trips %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ trip.code }}</td>
+                          <td>{{ trip.dat }}</td>
+                          <td>{{ trip.party }}</td>
+                          <td>{{ trip.place }}</td>
+                          <td>{{ trip.trip }}</td>
+                          <td>
+                              <a href="{% url 'delrow' trip.id %}">
+                                <button type="button" class="btn btn-link btn-danger">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      <tr>
+                        <td><a href="{% url 'bill' %}" class="btn btn-primary">+ Add Data</a></td>
+                        <td colspan="6"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-action">
+                  <center>
+                    <a href="{% url 'billdetails' %}" class="btn btn-success">Generate Bill</a>
+                  </center>
+                </div>
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

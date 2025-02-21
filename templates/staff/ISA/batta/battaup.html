@@ -1,0 +1,158 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Update Batta</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Truck No</b></label>
+                    <input type="text" readonly class="form-control" value="{{code.code}}" name="code" id="code" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="date"><b>Date</b></label>
+                    <input type="date" readonly class="form-control" value="{{code.date}}" name="date" id="date" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Driver</b></label>
+                                <select class="form-control" name="driver"id="driver">
+                                    <option>{{code.driver}}</option>
+                                    {% for driver in driver %}
+                                    <option >{{driver.driver}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="sheetno"><b>TripSheet No</b></label>
+                    <input type="text" class="form-control" value="{{code.sheetno}}" readonly name="sheetno" id="sheetno">
+                  </div>
+                </div>
+                      </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="opkm"><b>Opening KM</b></label>
+                    <input type="number" class="form-control" value="{{trip.opkm}}" name="opkm" id="opkm">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="clkm"><b>Closing KM</b></label>
+                    <input type="number" class="form-control" name="clkm" value="{{trip.clkm}}" id="clkm">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="batta"><b>Batta</b></label>
+                    <input type="number" class="form-control" value="{{code.batta}}" name="batta" id="batta">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lift"><b>Lift</b></label>
+                    <input type="number" class="form-control" name="lift" value="{{code.lift}}" id="lift">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="print"><b>Print</b></label>
+                    <input type="number" class="form-control" value="{{code.print}}" name="print" id="print">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="othexp"><b>Other Expenses</b></label>
+                    <input type="number" class="form-control" name="othexp" value="{{code.othexp}}" id="othexp">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="wei"><b>WEI</b></label>
+                    <input type="number" class="form-control" value="{{code.wei}}" name="wei" id="wei">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="halt"><b>Halt</b></label>
+                    <input type="number" class="form-control" name="halt" value="{{code.halt}}" id="halt">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="park"><b>Park</b></label>
+                    <input type="number" class="form-control" value="{{code.park}}" name="park" id="park">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="rto"><b>RTO</b></label>
+                    <input type="number" class="form-control" name="rto" value="{{code.rto}}" id="rto">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adv"><b>Advance</b></label>
+                    <input type="number" class="form-control" value="{{code.adv}}" name="adv" id="adv">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="loan"><b>Loan</b></label>
+                    <input type="number" class="form-control" name="loan" value="{{code.loan}}" id="loan">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+
+              </div>
+
+
+                <div class="card-action">
+                  <button type="submit" name="ser1" class="btn btn-success">Update</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

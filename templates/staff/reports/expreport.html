@@ -1,0 +1,66 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Truck No</td>
+            <td>RORO</td>
+            <td>Adblue</td>
+            <td>Oil</td>
+            <td>Park</td>
+            <td>Insurance</td>
+            <td>Tax</td>
+            <td>EMI</td>
+            <td>Test Work</td>
+            <td>AIR/ GREESE/TYRE</td>
+            <td>Spare Rate</td>
+            <td>Workshop</td>
+            <td>Rethread</td>
+            <td>New Tyre</td>
+            <td>Toll</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in ser1 %}
+        <tr>
+            <td>{{ data.date }}</td>
+            <td>{{ data.code }}</td>
+            <td>{{ data.roro }}</td>
+            <td>{{ data.adblue }}</td>
+            <td>{{ data.oil }}</td>
+            <td>{{ data.park }}</td>
+            <td>{{ data.insur }}</td>
+            <td>{{ data.tax }}</td>
+            <td>{{ data.emi }}</td>
+            <td>{{ data.test }}</td>
+            <td>{{ data.work }}</td>
+            <td>{{ data.spare }}</td>
+            <td>{{ data.workshop }}</td>
+            <td>{{ data.rethread }}</td>
+            <td>{{ data.tyre }}</td>
+            <td>{{ data.toll}}</td>
+            <td>{{ data.total}}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{total.roro}}</td>
+            <td>{{total.adblue}}</td>
+            <td>{{total.oil}}</td>
+            <td>{{total.park}}</td>
+            <td>{{total.insur}}</td>
+            <td>{{total.tax}}</td>
+            <td>{{total.emi}}</td>
+            <td>{{total.test}}</td>
+            <td>{{total.work}}</td>
+            <td>{{total.spare}}</td>
+            <td colspan="1"></td>
+            <td>{{total.rethread}}</td>
+            <td>{{total.tyre}}</td>
+            <td>{{total.toll}}</td>
+            <td>{{total.total}}</td>
+        </tr>
+    </tbody>
+</table>

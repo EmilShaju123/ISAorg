@@ -1,0 +1,161 @@
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home"></li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header"></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                          <h3 class="fw-bold mb-3">Trip Order</h3>
+                      </div>
+                    </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="code"><b>Code  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="code"id="code">
+                                    {% for i in d3 %}
+                                    <option>{{i.code}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dat"><b>Date  <span style="color: red;">*</span></b></label>
+                                <input type="date" class="form-control" name="dat" id="dat" required/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="party"><b>Party  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="party"id="party" required>
+                                    {% for i in d2 %}
+                                    <option>{{i.party}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="place"><b>Place  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="place"id="place" required>
+                                    {% for i in d %}
+                                    <option>{{i.place}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="dis"><b>Diesel Advance </b></label>
+                                <input type="number" value="0" class="form-control" step="0.01" name="dis"id="dis" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="disqnt"><b>Diesel Qnt</b></label>
+                                <input type="number" value="0" class="form-control" step="0.01" name="disqnt"id="disqnt">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="trip"><b>Type  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="trip"id="trip" required>
+                                    {% for i in d1 %}
+                                    <option>{{i.trip}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="bno"><b>Bill No</b></label>
+                                <input type="number" value="0" class="form-control" name="bno"id="bno" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="hire"><b>Hire </b></label>
+                                <input type="number" value="0" class="form-control" name="hire"id="hire" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="halt"><b>Halt</b></label>
+                                <input type="number" value="0" class="form-control" name="halt"id="halt" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="cont"><b>Container  <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="cont"id="cont" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="com"><b>Commission</b></label>
+                                <input type="number" value="0" class="form-control" name="com"id="com" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="card-action">
+                            <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="bill" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

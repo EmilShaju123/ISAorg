@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Island Shipping Agency</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="{% static 'img/tholadan/logoisa.png' %}"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["static/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/kaiadmin.min.css' %}" />
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+              <img
+                src="{% static 'img/tholadan/logoisa.png' %}"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="80"
+                width="200"
+              />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item active">
+                <a href="{% url 'adminhome' %}" class="collapsed" aria-expanded="false">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+
+              </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Components</h4>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarLayoutss">
+                  <i class="fa fa-user"></i>
+                  <p>User</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="sidebarLayoutss">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{% url 'register' %}">
+                        <span class="sub-item">User Register</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'userview' %}">
+                        <span class="sub-item">User Delete</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarLayout">
+                  <i class="fas fa-map-marked-alt"></i>
+                  <p>Trip</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="sidebarLayout">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{% url 'dailyupdate' %}">
+                        <span class="sub-item">ISA</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'outdailyupdate' %}">
+                        <span class="sub-item">Out</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'adminvehicle' %}">
+                        <span class="sub-item">Available Vehicles</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'battaview' %}">
+                  <i class="fas fa-hand-holding-usd"></i>
+                  <p>Batta</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'expenseview' %}">
+                  <i class="fas fa-wallet"></i>
+                  <p>Expense</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'mileage' %}">
+                  <i class="fas fa-truck"></i>
+                  <p>Mileage</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'isaprofit' %}">
+                  <i class="fas fa-chart-line"></i>
+                  <p>Profit/Loss</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                  <i class="fa fa-history"></i>
+                  <p>History</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="sidebarLayouts">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{% url 'triphistory' %}">
+                        <span class="sub-item">Trip</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'battahistory' %}">
+                        <span class="sub-item">Batta</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'expensehistory' %}">
+                        <span class="sub-item">Expense</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'billhistory' %}">
+                        <span class="sub-item">Bill</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a data-bs-toggle="collapse" href="#subnav1">
+                        <span class="sub-item">Deleted Data</span>
+                        <span class="caret"></span>
+                      </a>
+                      <div class="collapse" id="subnav1">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="{% url 'deltriphistory' %}">
+                              <span class="sub-item">Trip</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{% url 'delbattahistory' %}">
+                              <span class="sub-item">Batta</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{% url 'delexpensehistory' %}">
+                              <span class="sub-item">Expense</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'logout_view' %}">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Logout</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+              <a href="index.html" class="logo">
+                <img
+                  src="{% static 'img/kaiadmin/logo_light.svg' %}"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="20"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              <nav
+                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
+              >
+
+              </nav>
+
+
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+
+        {% block content %}
+
+        {% endblock %}
+      </div>
+
+      <!-- Custom template | don't include it in your project! -->
+
+      <!-- End Custom template -->
+    </div>
+    <!--   Core JS Files   -->
+    <script src="{% static 'js/core/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/core/popper.min.js' %}"></script>
+    <script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+    <!-- Chart JS -->
+    <script src="{% static 'js/plugin/chart.js/chart.min.js' %}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{% static 'js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{% static 'js/plugin/chart-circle/circles.min.js' %}"></script>
+
+    <!-- Datatables -->
+    <script src="{% static 'js/plugin/datatables/datatables.min.js' %}"></script>
+
+
+
+    <!-- jQuery Vector Maps -->
+    <script src="{% static 'js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'js/plugin/jsvectormap/world.js' %}"></script>
+
+
+    <!-- Kaiadmin JS -->
+    <script src="{% static 'js/kaiadmin.min.js' %}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{% static 'js/setting-demo.js' %}"></script>
+    <script src="{% static 'js/demo.js' %}"></script>
+    <script>
+      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+      });
+
+      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+      });
+
+      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+      });
+    </script>
+  </body>
+</html>
+
+

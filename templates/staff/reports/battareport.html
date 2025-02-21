@@ -1,0 +1,60 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Driver</td>
+            <td>Truck No</td>
+            <td>Tripsheet No</td>
+            <td>Batta</td>
+            <td>Lift</td>
+            <td>Print</td>
+            <td>Other Exp</td>
+            <td>WEI</td>
+            <td>Halt</td>
+            <td>Park</td>
+            <td>RTO</td>
+            <td>Advance</td>
+            <td>Loan</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in ser1 %}
+        <tr>
+            <td>{{ data.date }}</td>
+            <td>{{ data.driver }}</td>
+            <td>{{ data.code }}</td>
+            <td>{{ data.sheetno }}</td>
+            <td>{{ data.batta }}</td>
+            <td>{{ data.lift }}</td>
+            <td>{{ data.print }}</td>
+            <td>{{ data.othexp }}</td>
+            <td>{{ data.wei }}</td>
+            <td>{{ data.halt }}</td>
+            <td>{{ data.park }}</td>
+            <td>{{ data.rto }}</td>
+            <td>{{ data.adv }}</td>
+            <td>{{ data.loan }}</td>
+            <td>{{ data.total}}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>{{total.batta}}</td>
+            <td>{{total.lift}}</td>
+            <td>{{total.print}}</td>
+            <td>{{total.othexp}}</td>
+            <td>{{total.wei}}</td>
+            <td>{{total.halt}}</td>
+            <td>{{total.park}}</td>
+            <td>{{total.rto}}</td>
+            <td>{{total.adv}}</td>
+            <td>{{total.loan}}</td>
+            <td>{{total.total}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+<table>
+    <tr>
+        <td>Date</td>
+        <td>Truck No</td>
+        <td>Feet</td>
+        <td>Driver</td>
+        <td>Trans</td>
+        <td>Party</td>
+        <td>Place</td>
+        <td>Trip</td>
+        <td>Hire</td>
+        <td>Diesel</td>
+        <td>Diesel Qnt</td>
+    </tr>
+    {% for trip in ser1 %}
+    <tr>
+        <td>{{trip.dat}}</td>
+        <td>{{trip.code}}</td>
+        <td>{{trip.code.feet}}</td>
+        <td>{{trip.code.driver}}</td>
+        <td>{{trip.code.trans}}</td>
+        <td>{{trip.party}}</td>
+        <td>{{trip.place}}</td>
+        <td>{{trip.trip}}</td>
+        <td>{{trip.hire}}</td>
+        <td>{{trip.diesel}}</td>
+        <td>{{trip.dieselqnt}}</td>
+    </tr>
+    {% endfor %}
+</table>

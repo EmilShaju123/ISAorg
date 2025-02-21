@@ -1,0 +1,171 @@
+<table class=" table table-striped ">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Truck No</td>
+            <td>Feet</td>
+            <td>Driver</td>
+            <td>Trans</td>
+            <td>Party</td>
+            <td>Place</td>
+            <td>Type</td>
+            <td>Hire</td>
+            <td>Halt</td>
+            <td>Diesel</td>
+            <td>Diesel Qnt</td>
+            <td>Open KM</td>
+            <td>Close KM</td>
+            <td>Mileage</td>
+            <td>Buy</td>
+            <td>Out Advance</td>
+            <td>Container</td>
+            <td>Tripsheet No</td>
+            <td>Batta</td>
+            <td>Lift</td>
+            <td>Print</td>
+            <td>Oth Exp</td>
+            <td>WEI</td>
+            <td>Halt</td>
+            <td>Park</td>
+            <td>RTO</td>
+            <td>Advance</td>
+            <td>Loan</td>
+            <td>Total</td>
+            <td>Roro</td>
+            <td>Adblue</td>
+            <td>Oil</td>
+            <td>Insurance</td>
+            <td>Tax</td>
+            <td>EMI</td>
+            <td>Test Work</td>
+            <td>Work</td>
+            <td>Spare Rate</td>
+            <td>Workshop</td>
+            <td>Toll</td>
+            <td>Rethread</td>
+            <td>Commission</td>
+            <td>Balance</td>
+            <td>Bill No</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in trip %}
+        <tr>
+            <td>{{data.trip.dat}}</td>
+            <td>{{data.trip.code}}</td>
+            <td>{{data.trip.code.feet}}</td>
+            <td>{{data.trip.driver.driver}}</td>
+            <td>{{data.trip.code.trans}}</td>
+            <td>{{data.trip.party}}</td>
+            <td>{{data.trip.place}}</td>
+            <td>{{data.trip.trip}}</td>
+            <td>{{data.trip.hire}}</td>
+            <td>{{data.trip.halt}}</td>
+            <td>{{data.trip.dis}}</td>
+            <td>{{data.trip.disqnt}}</td>
+            <td>{{data.trip.opkm}}</td>
+            <td>{{data.trip.clkm}}</td>
+            <td>{{data.mileage}}</td>
+            <td>{{data.trip.buy|default:0}}</td>
+            <td>{{data.trip.outadv|default:0}}</td>
+            <td>{{data.trip.cont}}</td>
+            <td>{{data.batta.sheetno|default:0}}</td>
+            <td>{{data.batta.batta|default:0}}</td>
+            <td>{{data.batta.lift|default:0}}</td>
+            <td>{{data.batta.print|default:0}}</td>
+            <td>{{data.batta.othexp|default:0}}</td>
+            <td>{{data.batta.wei|default:0}}</td>
+            <td>{{data.batta.halt|default:0}}</td>
+            <td>{{data.batta.park|default:0}}</td>
+            <td>{{data.batta.rto|default:0}}</td>
+            <td>{{data.batta.adv|default:0}}</td>
+            <td>{{data.batta.loan|default:0}}</td>
+            <td>{{data.batta.total|default:0}}</td>
+            <td>{{data.exp.roro|default:0}}</td>
+            <td>{{data.exp.adblue|default:0}}</td>
+            <td>{{data.exp.oil|default:0}}</td>
+            <td>{{data.exp.insur|default:0}}</td>
+            <td>{{data.exp.tax|default:0}}</td>
+            <td>{{data.exp.emi|default:0}}</td>
+            <td>{{data.exp.test|default:0}}</td>
+            <td>{{data.exp.work|default:0}}</td>
+            <td>{{data.exp.spare|default:0}}</td>
+            <td>{{data.exp.workshop|default:''}}</td>
+            <td>{{data.exp.toll|default:0}}</td>
+            <td>{{data.exp.rethread|default:0}}</td>
+            <td>{{data.trip.com|default:0}}</td>
+            <td><b>
+                {% if data.profit > 0 %}
+                <span style="color: green;">{{data.profit}}</span>
+                {% elif data.profit < 0 %}
+                <span style="color: red;">{{data.profit}}</span>
+                {% else %}
+                <span style="color: black;">{{data.profit}}</span>
+                {% endif %}
+            </b></td>
+            <td>{{data.trip.bno}}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL</td>
+        <td>{{hire}}</td>
+        <td>{{halt}}</td>
+        <td>{{diesel}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{bata}}</td>
+        <td>{{lift}}</td>
+        <td>{{print}}</td>
+        <td>{{othexp}}</td>
+        <td>{{wei}}</td>
+        <td>{{halts}}</td>
+        <td>{{park}}</td>
+        <td>{{rto}}</td>
+        <td>{{adv}}</td>
+        <td>{{loan}}</td>
+        <td>{{total}}</td>
+        <td>{{roro}}</td>
+        <td>{{adblue}}</td>
+        <td>{{oil}}</td>
+        <td>{{insur}}</td>
+        <td>{{tax}}</td>
+        <td>{{emi}}</td>
+        <td>{{test}}</td>
+        <td>{{work}}</td>
+        <td>{{spare}}</td>
+        <td></td>
+        <td>{{toll}}</td>
+        <td>{{rethread}}</td>
+        <td>{{com}}</td>
+        <td>{{bal}}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan="2" class="text-center">Total of hire and halt</td>
+        <td colspan="2" class="text-center">{{ hire|add:halt }}</td>
+        <td colspan="34"></td>
+    </tr>
+    </tfoot>
+</table>

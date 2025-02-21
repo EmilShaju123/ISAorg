@@ -1,0 +1,249 @@
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    <style>
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Full Report</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="frdate"><b>Date From</b></label>
+                                    <input type="date" class="form-control" name="frdate" id="frdate" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="todate"><b>Date To</b></label>
+                                    <input type="date" class="form-control" name="todate" id="todate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="code"><b>Truck No</b></label>
+                                    <select class="form-control" name="code" id="code">
+                                        <option>----------------------------------Select---------------------------------------</option>
+                                        {% for code in code %}
+                                        <option>{{ code.code}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card-action">
+                                <button type="submit" name="ser1" class="btn btn-success">
+                                    Search &nbsp;
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button type="submit" name="export" class="btn btn-primary">Export</button>
+                            </div>
+
+                        {% if trip %}
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Trip Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="height: 600px; overflow-y: auto;">
+                                <table class=" table table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Date</th>
+                                            <th>Truck No</th>
+                                            <th>Feet</th>
+                                            <th>Driver</th>
+                                            <th>Trans</th>
+                                            <th>Party</th>
+                                            <th>Place</th>
+                                            <th>Type</th>
+                                            <th>Hire</th>
+                                            <th>Halt</th>
+                                            <th>Diesel</th>
+                                            <th>Diesel Qnt</th>
+                                            <th>Open KM</th>
+                                            <th>Close KM</th>
+                                            <th>Mileage</th>
+                                            <th>Buy</th>
+                                            <th>Out Advance</th>
+                                            <th>Container</th>
+                                            <th>Tripsheet No</th>
+                                            <th>Batta</th>
+                                            <th>Lift</th>
+                                            <th>Print</th>
+                                            <th>Oth Exp</th>
+                                            <th>WEI</th>
+                                            <th>Halt</th>
+                                            <th>Park</th>
+                                            <th>RTO</th>
+                                            <th>Advance</th>
+                                            <th>Loan</th>
+                                            <th>Total</th>
+                                            <th>Roro</th>
+                                            <th>Adblue</th>
+                                            <th>Oil</th>
+                                            <th>Insurance</th>
+                                            <th>Tax</th>
+                                            <th>EMI</th>
+                                            <th>Test Work</th>
+                                            <th>Work</th>
+                                            <th>Spare Rate</th>
+                                            <th>Workshop</th>
+                                            <th>Toll</th>
+                                            <th>Rethread</th>
+                                            <th>Commission</th>
+                                            <th>Balance</th>
+                                            <th>Bill No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        {% for data in trip %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{data.trip.dat}}</td>
+                                            <td>{{data.trip.code}}</td>
+                                            <td>{{data.trip.code.feet}}</td>
+                                            <td>{{data.trip.driver.driver}}</td>
+                                            <td>{{data.trip.code.trans}}</td>
+                                            <td>{{data.trip.party}}</td>
+                                            <td>{{data.trip.place}}</td>
+                                            <td>{{data.trip.trip}}</td>
+                                            <td>{{data.trip.hire}}</td>
+                                            <td>{{data.trip.halt}}</td>
+                                            <td>{{data.trip.dis}}</td>
+                                            <td>{{data.trip.disqnt}}</td>
+                                            <td>{{data.trip.opkm}}</td>
+                                            <td>{{data.trip.clkm}}</td>
+                                            <td>{{data.mileage}}</td>
+                                            <td>{{data.trip.buy|default:0}}</td>
+                                            <td>{{data.trip.outadv|default:0}}</td>
+                                            <td>{{data.trip.cont}}</td>
+                                            <td>{{data.batta.sheetno|default:0}}</td>
+                                            <td>{{data.batta.batta|default:0}}</td>
+                                            <td>{{data.batta.lift|default:0}}</td>
+                                            <td>{{data.batta.print|default:0}}</td>
+                                            <td>{{data.batta.othexp|default:0}}</td>
+                                            <td>{{data.batta.wei|default:0}}</td>
+                                            <td>{{data.batta.halt|default:0}}</td>
+                                            <td>{{data.batta.park|default:0}}</td>
+                                            <td>{{data.batta.rto|default:0}}</td>
+                                            <td>{{data.batta.adv|default:0}}</td>
+                                            <td>{{data.batta.loan|default:0}}</td>
+                                            <td>{{data.batta.total|default:0}}</td>
+                                            <td>{{data.exp.roro|default:0}}</td>
+                                            <td>{{data.exp.adblue|default:0}}</td>
+                                            <td>{{data.exp.oil|default:0}}</td>
+                                            <td>{{data.exp.insur|default:0}}</td>
+                                            <td>{{data.exp.tax|default:0}}</td>
+                                            <td>{{data.exp.emi|default:0}}</td>
+                                            <td>{{data.exp.test|default:0}}</td>
+                                            <td>{{data.exp.work|default:0}}</td>
+                                            <td>{{data.exp.spare|default:0}}</td>
+                                            <td>{{data.exp.workshop|default:''}}</td>
+                                            <td>{{data.exp.toll|default:0}}</td>
+                                            <td>{{data.exp.rethread|default:0}}</td>
+                                            <td>{{data.trip.com|default:0}}</td>
+                                            <td><b>
+                                                {% if data.profit > 0 %}
+                                                    <span style="color: green;">{{data.profit}}</span>
+                                                {% elif data.profit < 0 %}
+                                                    <span style="color: red;">{{data.profit}}</span>
+                                                {% else %}
+                                                    <span style="color: black;">{{data.profit}}</span>
+                                                {% endif %}
+                                            </b></td>
+                                            <td>{{data.trip.bno}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="8"></th>
+                                            <th>TOTAL</th>
+                                            <th>{{hire}}</th>
+                                            <th>{{halt}}</th>
+                                            <th>{{diesel}}</th>
+                                            <td colspan="8"></td>
+                                            <th>{{bata}}</th>
+                                            <th>{{lift}}</th>
+                                            <th>{{print}}</th>
+                                            <th>{{othexp}}</th>
+                                            <th>{{wei}}</th>
+                                            <th>{{halts}}</th>
+                                            <th>{{park}}</th>
+                                            <th>{{rto}}</th>
+                                            <th>{{adv}}</th>
+                                            <th>{{loan}}</th>
+                                            <th>{{total}}</th>
+                                            <th>{{roro}}</th>
+                                            <th>{{adblue}}</th>
+                                            <th>{{oil}}</th>
+                                            <th>{{insur}}</th>
+                                            <th>{{tax}}</th>
+                                            <th>{{emi}}</th>
+                                            <th>{{test}}</th>
+                                            <th>{{work}}</th>
+                                            <th>{{spare}}</th>
+                                            <th></th>
+                                            <th>{{toll}}</th>
+                                            <th>{{rethread}}</th>
+                                            <th>{{com}}</th>
+                                            <th>{{bal}}</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7"></td>
+                                            <th colspan="2" class="text-center">Total of hire and halt</th>
+                                            <td colspan="2" class="text-center">{{ hire|add:halt }}</td>
+                                            <td colspan="34"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

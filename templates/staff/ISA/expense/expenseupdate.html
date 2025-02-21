@@ -1,0 +1,195 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <style>
+        .trip{
+            background-color:white;
+            color:black;
+            border:3px solid green;
+            width:80px;
+            height:50px;
+        }
+        .btn-row{
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+        }
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+            border-collapse: collapse;
+            table-layout: auto;
+            width: 100%;
+        }
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f0f0f0;
+        }
+        tfoot {
+            position: sticky;
+            bottom: 0;
+            background-color: #f0f0f0;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .hide-button {
+            visibility: hidden;
+        }
+    </style>
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Expense Updates</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="frdate"><b>Date From</b></label>
+                    <input type="date" class="form-control" name="frdate" id="frdate" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="todate"><b>Date To</b></label>
+                    <input type="date" class="form-control" name="todate" id="todate" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Truck No</b></label>
+                    <select class="form-control" name="code" id="code" >
+                        <option>--------------------Select-------------------</option>
+                        {% for code in code %}
+                        <option>{{code}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+                <div class="card-action">
+                  <button type="submit" name="ser1" class="btn btn-primary">
+                    Search &nbsp;
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+
+              {% if ser1 %}
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Expense Details</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive" style="height: 600px; overflow-y: auto;">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Truck No</th>
+                        <th>RORO</th>
+                        <th>Adblue</th>
+                        <th>Oil</th>
+                        <th>Park</th>
+                        <th>Insurance</th>
+                        <th>Tax</th>
+                        <th>EMI</th>
+                        <th>Test Work</th>
+                        <th>AIR/ GREESE/TYRE</th>
+                        <th>Spare Rate</th>
+                        <th>Workshop</th>
+                        <th>Rethread</th>
+                        <th>New Tyre</th>
+                        <th>Toll</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for data in ser1 %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'expup' data.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'expdel' data.id %}">
+                            <button type="button" class="btn btn-link btn-danger">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>{{ data.date }}</td>
+                        <td>{{ data.code }}</td>
+                        <td>{{ data.roro }}</td>
+                        <td>{{ data.adblue }}</td>
+                        <td>{{ data.oil }}</td>
+                        <td>{{ data.park }}</td>
+                        <td>{{ data.insur }}</td>
+                        <td>{{ data.tax }}</td>
+                        <td>{{ data.emi }}</td>
+                        <td>{{ data.test }}</td>
+                        <td>{{ data.work }}</td>
+                        <td>{{ data.spare }}</td>
+                        <td>{{ data.workshop }}</td>
+                        <td>{{ data.rethread }}</td>
+                        <td>{{ data.tyre }}</td>
+                        <td>{{ data.toll}}</td>
+                        <td>{{ data.total}}</td>
+                      </tr>
+                      {% endfor %}
+                    <tr>
+                      <td colspan="3"></td>
+                      <th>TOTAL</th>
+                      <th>{{total.roro}}</th>
+                      <th>{{total.adblue}}</th>
+                      <th>{{total.oil}}</th>
+                      <th>{{total.park}}</th>
+                      <th>{{total.insur}}</th>
+                      <th>{{total.tax}}</th>
+                      <th>{{total.emi}}</th>
+                      <th>{{total.test}}</th>
+                      <th>{{total.work}}</th>
+                      <th>{{total.spare}}</th>
+                      <td colspan="1"></td>
+                      <th>{{total.rethread}}</th>
+                      <th>{{total.tyre}}</th>
+                      <th>{{total.toll}}</th>
+                      <th>{{total.total}}</th>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              {% endif %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

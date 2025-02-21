@@ -1,0 +1,136 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+<form method="post" xmlns="http://www.w3.org/1999/html">
+    {% csrf_token %}
+    <style>
+        .highlight {
+            border-color: skyblue;
+            box-shadow: 0 0 10px skyblue;
+        }
+    </style>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Bill Generation</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dat"><b>From Date</b></label>
+                                        <input type="date" class="form-control" name="dat" id="dat" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="todate"><b>To Date</b></label>
+                                        <input type="date" class="form-control" name="todate" id="todate" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="party"><b>Party</b></label>
+                                        <select class="form-control" name="party" id="party" multiple>
+                                            {% for party in parties %}
+                                                <option>{{ party.party }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="place"><b>Place</b></label>
+                                        <select class="form-control" name="place" id="place" multiple>
+                                            {% for place in places %}
+                                                <option>{{ place.place }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-action">
+                                <button type="submit" name="ser" class="btn btn-primary">
+                                    Search &nbsp;
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            {% if trips %}
+                            <div class="card-body">
+                                <div class="card-header">
+                                    <h3 class="fw-bold mb-3">Trip View</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="display table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Select</th>
+                                                <th>SL NO</th>
+                                                <th>Code</th>
+                                                <th>Date</th>
+                                                <th>Party</th>
+                                                <th>Place</th>
+                                                <th>Trip</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for trip in trips %}
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        {% if trip.trip.checked %}
+                                                        <div class="form-check">
+                                                            <input class="form-check-input highlight" checked="checked" type="checkbox" value="{{trip.trip.id}}" name="boxes">
+                                                        </div>
+                                                        {% else %}
+                                                        <div class="form-check">
+                                                            <input class="form-check-input highlight" type="checkbox" value="{{trip.trip.id}}" name="boxes">
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{trip.trip.code}}</td>
+                                                <td>{{trip.trip.dat}}</td>
+                                                <td>{{trip.trip.party}}</td>
+                                                <td>{{trip.trip.place}}</td>
+                                                <td>{{trip.trip.trip}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-action">
+                                    <button type="submit" name="gen" class="btn btn-success">Billing</button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
