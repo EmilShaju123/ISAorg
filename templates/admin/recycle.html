@@ -1,0 +1,203 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+  <style>
+    .table-container {
+      height: 300px; /* Set the height of the container */
+    }
+    table {
+      border-collapse: collapse;
+      width: 45%; /* Make the tables 45% wide */
+      float: left; /* Make the tables float next to each other */
+      margin: 10px; /* Add some margin between the tables */
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: #f0f0f0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Party</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Restore</th>
+                      <th>Sl No</th>
+                      <th>Party</th>
+                      <th>Address</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for party in party %}
+                      <tr>
+                        {% if party.party %}
+                        <td>
+
+                          <a href="{% url 'partyrestore' party.party %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-reply"></i>
+                              </button>
+                          </a>
+                        </td>
+
+                        {% endif %}
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ party.party }}</td>
+                        <td>{{party.add}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No party found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Place</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Restore</th>
+                      <th>Sl No</th>
+                      <th>Place</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for place in place %}
+                      <tr>
+                        <td>
+                          {% if place.place %}
+                          <a href="{% url 'placerestore' place.place %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-reply"></i>
+                              </button>
+                          </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ place.place }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No places found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Driver</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Restore</th>
+                      <th>Sl No</th>
+                      <th>Driver</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for driver in driver %}
+                      <tr>
+                        <td>
+                          {% if driver.driver %}
+                          <a href="{% url 'driverrestore' driver.driver %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-reply"></i>
+                              </button>
+                          </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ driver.driver }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No driver found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Trip</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Restore</th>
+                      <th>Sl No</th>
+                      <th>Trip</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for trip in trip %}
+                      <tr>
+                        <td>
+                          {% if trip.trip %}
+                          <a href="{% url 'shiftrestore' trip.trip %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-reply"></i>
+                              </button>
+                          </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ trip.trip }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No trip found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

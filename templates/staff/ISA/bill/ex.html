@@ -80,7 +80,7 @@
     {% endif %}
     {% if i.halt != 0 %}
         <tr class="padd">
-        <td class="font">Halting Charges for {{ i.haltqnt }} day{{ day|pluralize:"s" }} ({{ dat|date:"d-m-Y" }} to {{ billdate|date:"d-m-Y" }})</td>
+        <td class="font">Halting Charges for {{ i.haltqnt }} day{{ i.haltqnt|pluralize:"s" }} ({{ dat|date:"d-m-Y" }} to {{ billdate|date:"d-m-Y" }})</td>
         <td align="center" class="font">{{i.haltqnt}}</td>
         <td align="center" class="font">{{i.halt}}</td>
         <td align="center" class="font">{{thalt}}</td>

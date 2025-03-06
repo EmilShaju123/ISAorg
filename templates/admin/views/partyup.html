@@ -1,0 +1,49 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator">
+                <i class="icon-arrow-right"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Update Party</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="party"><b>Party</b></label>
+                    <input type="text" readonly class="form-control" value="{{party.party}}" name="party" id="party" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group" >
+                          <label for="add"><b>Address</b></label>
+                          <textarea class="form-control" name="add"  id="add">{{party.add}}</textarea>
+                      </div>
+                  </div>
+              </div>
+                  <div class="card-action">
+                    <button type="submit" name="ser1" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
