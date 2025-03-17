@@ -1,0 +1,104 @@
+{% extends 'staffindex.html' %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <style>
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .button-container button {
+      width: 150px;
+      height: 40px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .table-container {
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      table-layout: auto;
+      width: 100%;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: #f0f0f0;
+    }
+
+    tfoot {
+      position: sticky;
+      bottom: 0;
+      background-color: #f0f0f0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="page-header">
+        <ul class="breadcrumbs mb-3">
+          <li class="nav-home"></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Monthly Update</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive table-container">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>
+                        <div class="button-container">
+                          <button type="submit" name="ser1" class="btn btn-primary">TOLL</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">TAX</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">RTO</button>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        <div class="button-container">
+                          <button type="submit" name="ser1" class="btn btn-primary">LOAN</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">RETHREAD</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">NEW TYRE</button>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        <div class="button-container">
+                          <button type="submit" name="ser1" class="btn btn-primary">INSURANCE</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">ADBLUE</button>
+                          <button type="submit" name="ser1" class="btn btn-primary">TEST WORK</button>
+                        </div>
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
