@@ -2,6 +2,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
@@ -12,6 +13,11 @@
                 </li>
               </ul>
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
@@ -24,124 +30,169 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="code"><b>Truck No</b></label>
                                 <input type="text" value="{{trip.code}}" class="form-control" name="code"id="code" readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="date"><b>Date</b></label>
-                                <input type="date" value="{{trip.dat}}" class="form-control" name="date"id="date" readonly>
+                                <input type="text" value="{{trip.dat|date:'Y-m-d'}}" class="form-control" name="date"id="date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="roro"><b>RORO</b></label>
+                                <input type="number" class="form-control" name="roro" id="roro"/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="adblue"><b>Adblue</b></label>
+                                <input type="number" class="form-control" name="adblue" id="adblue"/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="oil"><b>Oil</b></label>
+                                <input type="number" class="form-control" name="oil" id="oil" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="insur"><b>Insurance</b></label>
+                                <input type="number" class="form-control" name="insur" id="insur"/>
                             </div>
                         </div>
                     </div>
 
                       <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group" >
-                                <label for="roro"><b>RORO</b></label>
-                                <input type="number" value="0" class="form-control" name="roro" id="roro" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="adblue"><b>Adblue</b></label>
-                                <input type="number" value="0" class="form-control" name="adblue" id="adblue" required/>
-                            </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group" >
-                                <label for="oil"><b>Oil</b></label>
-                                <input type="number" value="0" class="form-control" name="oil" id="oil" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group" >
-                                <label for="insur"><b>Insurance</b></label>
-                                <input type="number" value="0" class="form-control" name="insur" id="insur" required/>
-                            </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="tax"><b>Tax</b></label>
-                                <input type="number" value="0" class="form-control" name="tax" id="tax" required>
+                                <input type="number" class="form-control" name="tax" id="tax">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
-                                <label for="emi"><b>EMI</b></label>
-                                <input type="number" value="0" class="form-control" name="emi" id="emi" required>
+                                <label for="othexp"><b>Other Expense</b></label>
+                                <input type="number" class="form-control"  name="othexp" id="othexp">
                             </div>
                         </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="test"><b>Test Work</b></label>
-                                <input type="number" value="0" class="form-control" name="test" id="test" required>
+                                <input type="number" class="form-control" name="test" id="test">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="work"><b>Work Type</b></label>
-                                <input type="number" value="0" class="form-control" name="work" id="work" required>
+                                <input type="number" class="form-control" name="work" id="work">
                             </div>
                         </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
+                          <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="spare"><b>Spare Rate</b></label>
-                                <input type="number" value="0" class="form-control" name="spare" id="spare" required>
+                                <input type="number" class="form-control" name="spare" id="spare">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="workshop"><b>Workshop</b></label>
-                                <input type="text" class="form-control" name="workshop" id="workshop" required>
+                                <input type="text" class="form-control" name="workshop" id="workshop">
                             </div>
                         </div>
                       </div>
 
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="rethread"><b>Rethread</b></label>
-                                <input type="number" value="0" class="form-control"  name="rethread" id="rethread" required>
+                                <input type="number" class="form-control"  name="rethread" id="rethread">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
                                 <label for="tyre"><b>New Tyre</b></label>
-                                <input type="number" value="0" class="form-control" name="tyre" id="tyre" required>
+                                <input type="number" class="form-control" name="tyre" id="tyre">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="toll"><b>Toll</b></label>
+                                <input type="number" class="form-control"  name="toll" id="toll">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="tyrework"><b>Tyre Work</b></label>
+                                <input type="number" class="form-control"  name="tyrework" id="tyrework">
+                            </div>
+                        </div>
+                          <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="taxk"><b>Tax Karnataka</b></label>
+                                <input type="number" class="form-control"  name="taxk" id="taxk">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" >
+                                <label for="taxtn"><b>Tax Tamil Nadu</b></label>
+                                <input type="number" class="form-control"  name="taxtn" id="taxtn">
                             </div>
                         </div>
                       </div>
 
                       <div class="row">
-                        <div class="col-md-6">
+                          <div class="col-md-2">
                             <div class="form-group" >
-                                <label for="toll"><b>Toll</b></label>
-                                <input type="number" value="0" class="form-control"  name="toll" id="toll" required>
+                                <label for="rtofine"><b>RTO Fine</b></label>
+                                <input type="number" class="form-control"  name="rtofine" id="rtofine">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group" >
-                                <label for="park"><b>Parking</b></label>
-                                <input type="number" value="0" class="form-control"  name="park" id="park" required>
+                                <label for="welfare"><b>Welfare</b></label>
+                                <input type="number" class="form-control"  name="welfare" id="welfare">
                             </div>
                         </div>
+                      </div>
 
+                      <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group" >
+                                <label for="remarkid"><b>Remark Type</b></label>
+                                <select class="form-control"  name="remarkid" id="remarkid">
+                                    <option value="">------------------Select------------------</option>
+                                    <option>RORO</option>
+                                    <option>Adblue</option>
+                                    <option>Oil</option>
+                                    <option>Insurance</option>
+                                    <option>Tax</option>
+                                    <option>Other Expense</option>
+                                    <option>Test Work</option>
+                                    <option>New Battery</option>
+                                    <option>Spare Rate</option>
+                                    <option>Rethread</option>
+                                    <option>New Tyre</option>
+                                    <option>Toll</option>
+                                    <option>Tyre Work</option>
+                                    <option>Tax KA</option>
+                                    <option>Tax TN</option>
+                                    <option>RTO Fine</option>
+                                    <option>Welfare</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="form-group" >
+                                <label for="remark"><b>Remark</b></label>
+                                <input type="text" class="form-control"  name="remark" id="remark">
+                            </div>
+                          </div>
                       </div>
 
                       <div class="card-action">
@@ -165,5 +216,17 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            var remark = $('#remark').val();
+            var remarkid = $('#remarkid').val();
+            if (remark != '' && (remarkid == '' || remarkid == '------------------Select------------------')) {
+                alert('Please select a remark type');
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 
 {% endblock %}

@@ -3,14 +3,49 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
+
     <style>
         .trip{
             background-color:white;
             color:black;
             border:3px solid green;
-            width:80px;
-            height:50px;
+            width:47px;
+            height:40px;
         }
+
+        .table-responsive {
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .table-responsive table thead tr {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 2;
+        }
+
+        .table-responsive table tfoot tr {
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            z-index: 2;
+        }
+
+        .table-responsive table th:nth-child(1), .table-responsive table td:nth-child(1) {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .table-responsive table th:nth-child(2), .table-responsive table td:nth-child(2) {
+            position: sticky;
+            left: 150px; /* adjust the left property to match the width of the first column */
+            background-color: white;
+            z-index: 1;
+        }
+
         .btn-row{
             display: flex;
             flex-direction: row;
@@ -22,22 +57,15 @@
         table {
             border-collapse: collapse;
             table-layout: auto;
-            width: 100%;
+            width: 50%;
+            font-size: 24px;
         }
-        thead {
-            position: sticky;
-            top: 0;
-            background-color: #f0f0f0;
-        }
-        tfoot {
-            position: sticky;
-            bottom: 0;
-            background-color: #f0f0f0;
 
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            font-size: 12px;
         }
         .hide-button {
             visibility: hidden;
@@ -60,6 +88,22 @@
                         <div class="card-header">
                             <h3 class="fw-bold mb-3">Trip Updates</h3>
                         </div>
+                        {% if frdate or todate %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="frdates"><b>Date From</b></label>
+                                    <input type="date" value="{{frdate}}" class="form-control" name="frdate" id="frdates" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="todates"><b>Date To</b></label>
+                                    <input type="date" value="{{todate}}" class="form-control" name="todate" id="todates" />
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -74,6 +118,30 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% if truck %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="codes"><b>Truck No</b></label>
+                                    <select class="form-control" name="code" id="codes">
+                                        <option>{{truck}}</option>
+                                        <option>----------------------------------Select---------------------------------------</option>
+                                        {% for code in code %}
+                                        <option value="{{code.pk}}">{{ code.truckno}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="conts"><b>Container No</b></label>
+                                    <input type="text" class="form-control" name="cont" id="conts" />
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -81,29 +149,42 @@
                                     <select class="form-control" name="code" id="code">
                                         <option>----------------------------------Select---------------------------------------</option>
                                         {% for code in code %}
-                                        <option>{{ code.code}}</option>
+                                        <option value="{{code.pk}}">{{ code.truckno}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cont"><b>Container No</b></label>
+                                    <input type="text" class="form-control" name="cont" id="cont" />
+                                </div>
+                            </div>
                         </div>
+                        {% endif %}
                             <div class="card-action">
                                 <button type="submit" name="ser1" class="btn btn-primary">
                                     Search &nbsp;
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        {% if data_submitted %}
 
-                        {% if ser1 %}
                         <div class="card-header">
                             <h3 class="fw-bold mb-3">Trip Details</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="height: 600px; overflow-y: auto;">
-                                <table class=" table table-striped ">
+                                <table border="1">
                                     <thead>
                                         <tr>
-                                            <th colspan="2" style="text-align:center;" >Actions</th>
+                                            <th style="text-align:center;" >Actions</th>
+                                            <th></th>
                                             <th>Sl No</th>
                                             <th>Date</th>
                                             <th>Truck No</th>
@@ -114,33 +195,47 @@
                                             <th>Place</th>
                                             <th>Type</th>
                                             <th>Container</th>
+                                            <th>Tripsheet No</th>
+                                            <th>Batta</th>
+                                            <th>Batta Total</th>
                                             <th>Hire</th>
                                             <th>Halt</th>
                                             <th>Diesel</th>
                                             <th>Diesel Qnt</th>
+                                            <th>Op KM</th>
+                                            <th>Cl KM</th>
+                                            <th>Expense</th>
                                             <th>Bill No</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for data in ser1 %}
-                                        <tr>
+                                        <tr id="row-{{ data.trip.id }}">
                                             <td>
                                                 <div class="btn-row">
-                                                    <a href="{% url 'isaup' data.trip.id %}" >
-                                                        <button type="button" class="trip">Trip</button>
+                                                    <a href="{% url 'isaup' data.trip.id %}">
+                                                        <button type="button" class="trip" onclick="selectButton(event)">Trip</button>
                                                     </a>
                                                     {% if data.trip.battaid > 0 %}
-                                                        <button type="button" class="trip hide-button" disabled>Batta exists</button>
+                                                        <a href="{% url 'battaup'  data.trip.battaid %}?redirect=triporderupdate">
+                                                            <button type="button" class="trip" data-bs-toggle="tooltip" onclick="selectButton(event)">Batta
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                        </a>
                                                     {% else %}
-                                                        <a href="{% url 'batta' data.trip.id %}" >
-                                                            <button type="button" class="trip">Batta</button>
+                                                        <a href="{% url 'batta' data.trip.id %}">
+                                                            <button type="button" class="trip" onclick="selectButton(event)">Batta</button>
                                                         </a>
                                                     {% endif %}
                                                     {% if data.trip.expid > 0 %}
-                                                        <button type="button" class="trip" disabled>Expense Exists</button>
+                                                        <a href="{% url 'expup'  data.trip.expid %}?redirect=triporderupdate">
+                                                            <button type="button" class="trip" data-bs-toggle="tooltip" onclick="selectButton(event)">Exp
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                        </a>
                                                     {% else %}
                                                         <a href="{% url 'expense' data.trip.id %}" >
-                                                            <button type="button" class="trip">Expense</button>
+                                                            <button type="button" class="trip" onclick="selectButton(event)">Exp</button>
                                                         </a>
                                                     {% endif %}
                                                 </div>
@@ -153,42 +248,48 @@
                                                 </a>
                                             </td>
                                             <td>{{ forloop.counter }}</td>
-                                            <td>{{data.trip.dat}}</td>
-                                            <td>{{data.trip.code}}</td>
-                                            <td>{{data.trip.code.feet}}</td>
+                                            <td>{{data.trip.dat|date:"d-m-Y"}}</td>
+                                            <td>{{data.trip.code.truckno}}</td>
+                                            <td>{{data.trip.feet}}</td>
                                             <td>{{data.trip.driver.driver}}</td>
                                             <td>{{data.trip.code.trans}}</td>
-                                            <td>{{data.trip.party}}</td>
+                                            <td>{{data.trip.party.short}}</td>
                                             <td>{{data.trip.place}}</td>
                                             <td>{{data.trip.trip}}</td>
                                             <td>{{data.trip.cont}}</td>
+                                            <td>{{data.trip.sheetno}}</td>
+                                            <td>{{data.trip.batta}}</td>
+                                            <td>{{data.trip.battatotal}}</td>
                                             <td>{{data.trip.hire}}</td>
                                             <td>{{data.trip.halt}}</td>
                                             <td>{{data.trip.dis}}</td>
                                             <td>{{data.trip.disqnt}}</td>
+                                            <td>{{data.trip.opkm}}</td>
+                                            <td>{{data.trip.clkm}}</td>
+                                            <td>{{data.trip.exptotal}}</td>
                                             <td>{{data.trip.bno}}</td>
                                         </tr>
                                         {% endfor %}
+                                    <tr></tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="9"></th>
-                                            <th>TOTAL</th>
-                                            <th colspan="2"></th>
+                                            <th></th><th>TOTAL</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                                            <th></th>
+                                            <th colspan="3"></th>
+                                            <th>{{batta}}</th>
+                                            <th>{{battatotal}}</th>
                                             <th>{{hire}}</th>
                                             <th>{{halt}}</th>
-                                            <th>{{diesel}}</th>
-                                            <td colspan="2"></td>
+                                            <th>{{ diesel|floatformat:2 }}</th>
+                                            <th></th><th></th><th></th>
+                                            <th>{{expense}}</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
-                        {% endif %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                            {% endfor %}
                         {% endif %}
                     </div>
                 </div>
@@ -196,4 +297,30 @@
         </div>
     </div>
 </form>
+<script>
+
+    // When a button is selected
+function selectButton(event) {
+  // Remove active class from all buttons
+  document.querySelectorAll('.trip').forEach(button => button.classList.remove('active'));
+  // Add active class to the selected button
+  event.target.classList.add('active');
+  // Store the selected button's row ID in local storage
+  localStorage.setItem('selectedRowId', event.target.closest('tr').id);
+}
+
+// After updating, redirect to the selected button's row
+function redirectToSelectedRow() {
+  const selectedRowId = localStorage.getItem('selectedRowId');
+  if (selectedRowId) {
+    // Scroll to the selected row
+    document.getElementById(selectedRowId).scrollIntoView();
+    // Remove the selected row ID from local storage
+    localStorage.removeItem('selectedRowId');
+  }
+}
+
+// Call redirectToSelectedRow function after page load
+document.addEventListener('DOMContentLoaded', redirectToSelectedRow);
+</script>
 {% endblock %}

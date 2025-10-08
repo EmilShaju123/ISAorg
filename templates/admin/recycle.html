@@ -22,7 +22,6 @@
       text-align: left;
     }
   </style>
-
   <div class="container">
     <div class="page-inner">
       <div class="row">
@@ -54,7 +53,6 @@
                               </button>
                           </a>
                         </td>
-
                         {% endif %}
                         <td>{{ forloop.counter }}</td>
                         <td>{{ party.party }}</td>
@@ -189,6 +187,50 @@
                     {% empty %}
                       <tr>
                         <td colspan="5">No trip found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Trans</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Restore</th>
+                      <th>Sl No</th>
+                      <th>Trans</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for trans in trans %}
+                      <tr>
+                        <td>
+                          {% if trans.trans %}
+                          <a href="{% url 'transrestore' trans.trans %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-reply"></i>
+                              </button>
+                          </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ trans.trans }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No trans found.</td>
                       </tr>
                     {% endfor %}
                   </tbody>

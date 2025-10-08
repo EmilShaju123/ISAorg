@@ -1,0 +1,64 @@
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home"></li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header"></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                          <h3 class="fw-bold mb-3">Batta Registration</h3>
+                        <div class="form-group" >
+                            <label for="place"><b>Place <span style="color: red;">*</span></b></label>
+                            <select class="form-control" name="place" id="place" required>
+                                {% for i in place %}
+                              <option>{{i.place}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                          <div class="form-group" >
+                            <label for="feet"><b>Feet <span style="color: red;">*</span></b></label>
+                            <select class="form-control" name="feet" id="feet" required>
+                              <option>20</option>
+                                <option>40</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="batta"><b>Batta <span style="color: red;">*</span></b></label>
+                            <input type="number" name="batta" id="batta" class="form-control" required>
+                        </div>
+
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="reset" class="btn btn-danger">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

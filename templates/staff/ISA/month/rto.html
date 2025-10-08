@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'staffindex.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home"></li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header"></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                          <h3 class="fw-bold mb-3">RTO</h3>
+                      </div>
+                    </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="code"><b>Code  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="code"id="code">
+                                    {% for i in trucks %}
+                                    <option>{{i.code}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date"><b>Date  <span style="color: red;">*</span></b></label>
+                                <input type="date" class="form-control" name="date" id="date" required/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="rto"><b>RTO <span style="color: red;">*</span></b></label>
+                                <input type="number" class="form-control" step="0.01" name="rto" id="rto" required>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="card-action">
+                            <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="bill" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

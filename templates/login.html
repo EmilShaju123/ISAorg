@@ -2,56 +2,74 @@
 
 {% block content %}
 <form method="post">
-    {% csrf_token %}
-    <div class="container">
-        <div class="page-inner">
-            <div class="page-header">
-                <ul class="breadcrumbs mb-3">
-                    <li class="nav-home"></li>
-                    <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                    </li>
-                </ul>
+  {% csrf_token %}
+  <div class="container">
+    <div class="page-inner">
+      <div class="page-header">
+        <ul class="breadcrumbs mb-3">
+          <li class="nav-home"></li>
+          <li class="separator"> <i class="icon-arrow-right"></i> </li>
+        </ul>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+      {% endif %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Login</h3>
             </div>
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="fw-bold mb-3">Login</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="uname"><b>User Name</b></label>
-                                        <input type="text" required class="form-control" name="uname" id="uname"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="pas"><b>Password</b></label>
-                                        <input type="password" required class="form-control" name="pas" id="pas"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-action">
-                                <button type="submit" class="btn btn-success">Login</button>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="uname"><b>User Name</b></label>
+                    <input type="text" required class="form-control" name="uname" id="uname"/>
+                  </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group position-relative">
+                    <label for="pas"><b>Password</b></label>
+                    <input type="password" required class="form-control" name="pas" id="pas"/>
+                    <span class="position-absolute" style="left:525px; top: 50px; cursor: pointer;" id="toggle-password">
+                      <i class="fa fa-eye-slash" id="eye-icon"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-action">
+                <button type="submit" class="btn btn-success">Login</button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+<script>
+  document.getElementById('toggle-password').addEventListener('click', function() {
+    var passwordField = document.getElementById('pas');
+    var eyeIcon = document.getElementById('eye-icon');
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      eyeIcon.classList.add('fa-eye');
+      eyeIcon.classList.remove('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      eyeIcon.classList.add('fa-eye-slash');
+      eyeIcon.classList.remove('fa-eye');
+    }
+  });
+</script>
+
 {% endblock %}

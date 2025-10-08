@@ -3,29 +3,31 @@
 <form method="post" xmlns="http://www.w3.org/1999/html">
     {% csrf_token %}
     <style>
-        .table-container {
-        height: 300px; /* Set the height of the container */
-        }
         table {
-            border-collapse: collapse;
-            table-layout: auto;
-            width: 100%;
-        }
-        thead {
-            position: sticky;
-            top: 0;
-            background-color: #f0f0f0;
-        }
-        tfoot {
-            position: sticky;
-            bottom: 0;
-            background-color: #f0f0f0;
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+        border-collapse: collapse;
+        table-layout: auto;
+        width: 100%;
+    }
+    .table-responsive {
+        position: relative;
+        overflow-y: auto;
+    }
+    thead {
+        position: sticky;
+        top: 0;
+        background-color: #f0f0f0;
+    }
+    tfoot {
+        position: sticky;
+        bottom: 0;
+        background-color: #f0f0f0;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        font-size: 12px;
+    }
     </style>
     <div class="container">
         <div class="page-inner">
@@ -61,7 +63,7 @@
                                     <select class="form-control" name="code" id="code">
                                         <option>----------------------------------Select---------------------------------------</option>
                                         {% for code in code %}
-                                        <option>{{ code.code}}</option>
+                                        <option value="{{ code.code}}">{{ code.truckno}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -79,7 +81,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="height: 600px; overflow-y: auto;">
-                                <table class=" table table-striped ">
+                                <table border="1">
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
@@ -103,12 +105,12 @@
                                         {% for data in trip %}
                                         <tr>
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{data.trip.dat}}</td>
-                                            <td>{{data.trip.code}}</td>
+                                            <td>{{data.trip.dat|date:"d-m-Y"}}</td>
+                                            <td>{{data.trip.code.truckno}}</td>
                                             <td>{{data.trip.code.feet}}</td>
                                             <td>{{data.trip.driver.driver}}</td>
                                             <td>{{data.trip.code.trans}}</td>
-                                            <td>{{data.trip.party}}</td>
+                                            <td>{{data.trip.party.short}}</td>
                                             <td>{{data.trip.place}}</td>
                                             <td>{{data.trip.trip}}</td>
                                             <td>{{data.trip.cont}}</td>
@@ -126,7 +128,7 @@
                                             <th>TOTAL</th>
                                             <td>{{hire}}</td>
                                             <td>{{halt}}</td>
-                                            <td>{{diesel}}</td>
+                                            <td>{{diesel|floatformat:2}}</td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <tr>

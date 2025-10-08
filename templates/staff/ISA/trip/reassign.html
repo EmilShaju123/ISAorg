@@ -45,6 +45,7 @@
                       <tr>
                         <th>Sl No</th>
                         <th>Truck No</th>
+                        <th>TRANS</th>
                         <th>Driver</th>
                         <th>Action</th>
                       </tr>
@@ -54,6 +55,7 @@
                         <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ trucks.code }}</td>
+                          <td>{{ trucks.trans }}</td>
                           <td>{{ trucks.driver }}</td>
                           <td>
                             <a href="{% url 'assignup'  trucks.code %}">

@@ -1,0 +1,277 @@
+{% extends base_template %}
+{% block content %}
+<form method="post" xmlns="http://www.w3.org/1999/html">
+    {% csrf_token %}
+    <style>
+        .table-container {
+            height: 300px;
+        }
+        table {
+            border-collapse: collapse;
+            table-layout: auto;
+            width: 100%;
+        }
+        .table-responsive table thead tr {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 2;
+        }
+        .table-responsive table tfoot tr {
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            z-index: 2;
+        }
+        .table-responsive table th:nth-child(1),
+        .table-responsive table td:nth-child(1) {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 1;
+            border: 1px solid #ddd;
+        }
+        .table-responsive table th:nth-child(2),
+        .table-responsive table td:nth-child(2) {
+            position: sticky;
+            left: 35px;
+            background-color: white;
+            z-index: 1;
+            border: 1px solid #ddd;
+        }
+        .table-responsive table th,
+        .table-responsive table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Month Profit</h3>
+                        </div>
+                        {% if month or year %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="months"><b>Month <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="month" id="months" required>
+                                        <option>{{month}}</option>
+                                        <option value="">Select Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="years"><b>Year <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="year" id="years" required>
+                                        <option>{{year}}</option>
+                                        <option value="">Select Year</option>
+                                        {% for year in years %}
+                                        <option value="{{ year }}">{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="month"><b>Month <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="month" id="month" required>
+                                        <option value="">Select Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="year"><b>Year <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="year" id="year" required>
+                                        <option value="">Select Year</option>
+                                        {% for year in years %}
+                                        <option value="{{ year }}">{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="card-action">
+                            <button type="submit" name="ser1" class="btn btn-success">
+                                Search &nbsp;
+                                <i class="fa fa-search"></i>
+                            </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" name="export" class="btn btn-primary">Download</button>
+                        </div>
+                        {% if data.items %}
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">{{month}} {{year}} Monthly Report</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="height: 500px; overflow-y: auto;">
+                                <table border="1">
+                                    <tbody>
+                                        <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Code</th>
+                                            <th>Driver</th>
+                                            <th>Hire</th>
+                                            <th>Fuel</th>
+                                            <th>Fuel Qnt</th>
+                                            <th>Adblue</th>
+                                            <th>OP KM - CL KM</th>
+                                            <th>Con</th>
+                                            <th>Mileage</th>
+                                            <th>Batta Total</th>
+                                            <th>Salary</th>
+                                            <th>Repairs</th>
+                                            <th>New Tyre</th>
+                                            <th>Rethreads</th>
+                                            <th>Toll</th>
+                                            <th>Parking</th>
+                                            <th>New Battery</th>
+                                            <th>Expense Total</th>
+                                            <th>RTO</th>
+                                            <th>Welfare</th>
+                                            <th>Tax KL</th>
+                                            <th>Tax KA</th>
+                                            <th>Tax TN</th>
+                                            <th>Insurance</th>
+                                            <th>Test Work</th>
+                                            <th>Loan</th>
+                                            <th>Profit/Loss</th>
+                                        </tr>
+                                        </thead>
+                                        {% for code, values in data.items %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ code }}</td>
+                                            <td>{{ values.driver }}</td>
+                                            <td>{{ values.total_hire }}</td>
+                                            <td>{{ values.total_dis|floatformat:2 }}</td>
+                                            <td>{{ values.total_disqnt|floatformat:2 }}</td>
+                                            <td>{{ values.total_adblue }}</td>
+                                            <td>{{ values.first_opkm}}-{{ values.last_clkm }}</td>
+                                            <td>{{ values.con }}</td>
+                                            <td>{{ values.mileage|floatformat:2 }}</td>
+                                            <td>{{ values.total_batta }}</td>
+                                            <td>{{ values.salary }}</td>
+                                            <td>{{ values.total_repair }}</td>
+                                            <td>{{ values.total_tyre }}</td>
+                                            <td>{{ values.total_rethread }}</td>
+                                            <td>{{ values.total_toll }}</td>
+                                            <td>{{ values.total_park }}</td>
+                                            <td>{{ values.total_battery }}</td>
+                                            <td>{{ values.total_exp }}</td>
+                                            <td>{{ values.total_rto }}</td>
+                                            <td>{{ values.total_welfare }}</td>
+                                            <td>{{ values.total_tax }}</td>
+                                            <td>{{ values.total_taxk }}</td>
+                                            <td>{{ values.total_taxtn }}</td>
+                                            <td>{{ values.total_insur }}</td>
+                                            <td>{{ values.total_test }}</td>
+                                            <td>{{ values.total_emi }}</td>
+                                            <td>
+                                                {% if values.total_profit > 0 %}
+                                                <span style="color: green;"><b>{{values.total_profit|floatformat:2}}</b></span>
+                                                {% elif values.total_profit < 0 %}
+                                                <span style="color: red;"><b>{{values.total_profit|floatformat:2}}</b></span>
+                                                {% else %}
+                                                <span style="color: black;"><b>{{values.total_profit|floatformat:2}}</b></span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Grand Total</th>
+                                            <th>{{total.hire}}</th>
+                                            <th>{{total.dis|floatformat:2}}</th>
+                                            <th></th>
+                                            <th>{{total.adblue}}</th>
+                                            <th></th><th></th><th></th>
+                                            <th>{{total.batta}}</th>
+                                            <th>{{total.salary}}</th>
+                                            <th>{{total.repair}}</th>
+                                            <th>{{total.tyre}}</th>
+                                            <th>{{total.rethread}}</th>
+                                            <th>{{total.toll}}</th>
+                                            <th>{{total.park}}</th>
+                                            <th>{{total.battery}}</th>
+                                            <th>{{total.exp}}</th>
+                                            <th>{{total.rto}}</th>
+                                            <th>{{total.welfare}}</th>
+                                            <th>{{total.tax}}</th>
+                                            <th>{{total.taxk}}</th>
+                                            <th>{{total.taxtn}}</th>
+                                            <th>{{total.insur}}</th>
+                                            <th>{{total.test}}</th>
+                                            <th>{{total.emi}}</th>
+                                            <th>
+                                                {% if total.profit > 0 %}
+                                                <span style="color: green;"><b>{{total.profit|floatformat:2}}</b></span>
+                                                {% elif total.profit < 0 %}
+                                                <span style="color: red;"><b>{{total.profit|floatformat:2}}</b></span>
+                                                {% else %}
+                                                <span style="color: black;"><b>{{total.profit|floatformat:2}}</b></span>
+                                                {% endif %}
+                                            </th>
+                                        </tr>
+                                        </tfoot>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% else %}
+                        <h5 class="text-center" style="color: gray;">No data found</h5>
+                        {% endif %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

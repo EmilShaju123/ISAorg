@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator">
+                <i class="icon-arrow-right"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Update Toll</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Code</b></label>
+                    <input type="text" readonly class="form-control" value="{{toll.code}}" id="code" />
+                  </div>
+                </div>
+                  <div class="col-md-6">
+                      <div class="form-group" >
+                          <label for="date"><b>Date</b></label>
+                          <input type="text" readonly class="form-control" value="{{toll.date}}" id="date" />
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group" >
+                          <label for="toll"><b>Toll</b></label>
+                          <input type="number"  class="form-control" value="{{toll.toll}}" name="toll" id="toll" />
+                      </div>
+                  </div>
+              </div>
+                  <div class="card-action">
+                    <button type="submit" name="ser1" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

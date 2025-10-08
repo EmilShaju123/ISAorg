@@ -6,6 +6,7 @@
             <td>Truck No</td>
             <td>Tripsheet No</td>
             <td>Batta</td>
+            <td>Genzet Batta</td>
             <td>Lift</td>
             <td>Print</td>
             <td>Other Exp</td>
@@ -21,11 +22,12 @@
     <tbody>
         {% for data in ser1 %}
         <tr>
-            <td>{{ data.date }}</td>
+            <td>{{ data.date|date:"d-m-Y" }}</td>
             <td>{{ data.driver }}</td>
             <td>{{ data.code }}</td>
             <td>{{ data.sheetno }}</td>
             <td>{{ data.batta }}</td>
+            <td>{{ data.genbatta }}</td>
             <td>{{ data.lift }}</td>
             <td>{{ data.print }}</td>
             <td>{{ data.othexp }}</td>
@@ -45,6 +47,7 @@
             <td></td>
             <td>TOTAL</td>
             <td>{{total.batta}}</td>
+             <td>{{total.genbatta}}</td>
             <td>{{total.lift}}</td>
             <td>{{total.print}}</td>
             <td>{{total.othexp}}</td>

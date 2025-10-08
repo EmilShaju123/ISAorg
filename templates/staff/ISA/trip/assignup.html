@@ -26,14 +26,31 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" >
-                        <label for="driver"><b>Driver</b></label>
+                        <label for="driver"><b>New Driver</b></label>
                         <select class="form-control" name="driver"id="driver">
-                            <option>{{truck.driver}}</option>
+                            <option value="">----------------Select----------------</option>
                             {% for driver in driver %}
-                            <option >{{driver.driver}}</option>
+                            <option>{{driver.driver}}</option>
                             {% endfor %}
                         </select>
                     </div>
+                </div>
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group" >
+                        <label for="predriver"><b>Previous Driver</b></label>
+                        <input type="text" value="{{truck.driver}}" class="form-control" name="predriver"id="predriver" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="date"><b>Last Working Day</b></label>
+                    <input type="date" class="form-control" name="date" id="date" />
+                  </div>
                 </div>
               </div>
 

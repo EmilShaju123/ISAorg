@@ -1,33 +1,33 @@
-{% extends 'staffindex.html' %}
+{% extends base_template %}
 
 {% block content %}
   <form method="post">
     {% csrf_token %}
     <style>
-        .table-container {
+    .table-container {
         height: 300px; /* Set the height of the container */
-        }
-        table {
-            border-collapse: collapse;
-            table-layout: auto;
-            width: 100%;
-        }
-        thead {
-            position: sticky;
-            top: 0;
-            background-color: #f0f0f0;
-        }
-        tfoot {
-            position: sticky;
-            bottom: 0;
-            background-color: #f0f0f0;
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    }
+    table {
+        border-collapse: collapse;
+        table-layout: auto;
+        width: 100%;
+    }
+    thead {
+        position: sticky;
+        top: 0;
+        background-color: #f0f0f0;
+    }
+    tfoot {
+        position: sticky;
+        bottom: 0;
+        background-color: #f0f0f0;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
     <div class="container">
       <div class="page-inner">
         <div class="page-header">
@@ -42,6 +42,22 @@
               <div class="card-header">
                 <h3 class="fw-bold mb-3">Batta Updates</h3>
               </div>
+              {% if frdate or todate %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="frdates"><b>Date From</b></label>
+                    <input type="date" class="form-control" name="frdate" id="frdates" value="{{frdate}}" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="todates"><b>Date To</b></label>
+                    <input type="date" class="form-control" name="todate" id="todates" value="{{todate}}" />
+                  </div>
+                </div>
+              </div>
+              {% else %}
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -56,19 +72,60 @@
                   </div>
                 </div>
               </div>
+              {% endif %}
+              {% if truck or drive or places %}
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="codes"><b>Truck No</b></label>
+                    <select class="form-control" name="code" id="codes" >
+                      <option>{{truck}}</option>
+                        <option>--------------------Select-------------------</option>
+                        {% for code in code %}
+                        <option value="{{code.code}}">{{code.truckno}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="drivers"><b>Driver</b></label>
+                    <select class="form-control" name="driver" id="drivers" >
+                      <option>{{drive}}</option>
+                        <option>--------------------Select-------------------</option>
+                        {% for driver in driver %}
+                        <option>{{driver}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="place"><b>Place</b></label>
+                    <select class="form-control" name="place" id="place" >
+                      <option>{{place}}</option>
+                        <option>--------------------Select-------------------</option>
+                        {% for place in places %}
+                        <option>{{place.place}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <div class="row">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="code"><b>Truck No</b></label>
                     <select class="form-control" name="code" id="code" >
                         <option>--------------------Select-------------------</option>
                         {% for code in code %}
-                        <option>{{code}}</option>
+                        <option value="{{code.code}}">{{code.truckno}}</option>
                         {% endfor %}
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="driver"><b>Driver</b></label>
                     <select class="form-control" name="driver" id="driver" >
@@ -79,33 +136,53 @@
                     </select>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="places"><b>Place</b></label>
+                    <select class="form-control" name="place" id="places" >
+                        <option>--------------------Select-------------------</option>
+                        {% for place in places %}
+                        <option>{{place.place}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
               </div>
+              {% endif %}
                 <div class="card-action">
                   <button type="submit" name="ser1" class="btn btn-primary">
                     Search &nbsp;
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
-
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
               {% if ser1 %}
               <div class="card-header">
                 <h3 class="fw-bold mb-3">Batta Details</h3>
               </div>
               <div class="card-body">
                 <div class="table-responsive" style="height: 600px; overflow-y: auto;">
-                  <table class="table table-striped">
+                  <table border="1">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                        {% if request.user.username != 'Fredy' %}
+                        <th style="text-align: center;" colspan="2">Action</th>
+                        {% endif %}
                         <th>Date</th>
                         <th>Driver</th>
                         <th>Truck No</th>
                         <th>Tripsheet No</th>
                         <th>Batta</th>
+                        <th>Additional Batta</th>
+                        <th>Genzet Batta</th>
                         <th>Lift</th>
                         <th>Print</th>
                         <th>Other Exp</th>
+                        <th>Tyre Work</th>
                         <th>WEI</th>
                         <th>Halt</th>
                         <th>Park</th>
@@ -113,11 +190,13 @@
                         <th>Advance</th>
                         <th>Loan</th>
                         <th>Total</th>
+
                       </tr>
                     </thead>
                     <tbody>
                       {% for data in ser1 %}
                       <tr>
+                        {% if request.user.username != 'Fredy' %}
                         <td>
                           <a href="{% url 'battaup'  data.id %}">
                             <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
@@ -132,32 +211,110 @@
                             </button>
                           </a>
                         </td>
-                        <td>{{ data.date }}</td>
+                        {% endif %}
+                        <td>{{ data.date|date:"d-m-Y" }}</td>
                         <td>{{ data.driver }}</td>
-                        <td>{{ data.code }}</td>
+                        <td>{{ data.code.truckno }}</td>
                         <td>{{ data.sheetno }}</td>
-                        <td>{{ data.batta }}</td>
-                        <td>{{ data.lift }}</td>
-                        <td>{{ data.print }}</td>
-                        <td>{{ data.othexp }}</td>
-                        <td>{{ data.wei }}</td>
-                        <td>{{ data.halt }}</td>
-                        <td>{{ data.park }}</td>
-                        <td>{{ data.rto }}</td>
-                        <td>{{ data.adv }}</td>
-                        <td>{{ data.loan }}</td>
+                        <td>
+                          {{ data.batta }}
+                          {% if data.remarkid == "batta" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.addbatta }}
+                          {% if data.remarkid == "addbatta" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.genbatta }}
+                          {% if data.remarkid == "genbatta" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.lift }}
+                          {% if data.remarkid == "lift" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.print }}
+                          {% if data.remarkid == "print" and data.remark|length > 1 %}
+                          <small><small>({{ data.remark }})</small></small>
+                          {% endif %}
+                        </td>
+                        <td style="position: relative;">
+                            {{ data.othexp }}
+                            {% if data.remark|length > 1 %}
+                              {% if data.remarkid == "othexp" or data.remarkid == "" %}
+                                <small>({{ data.remark }})</small>
+                              {% endif %}
+                            {% endif %}
+                        </td>
+                        <td>
+                          {{ data.tyrework }}
+                          {% if data.remarkid == "tyrework" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.wei }}
+                          {% if data.remarkid == "wei" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.halt }}
+                          {% if data.remarkid == "halt" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.park }}
+                          {% if data.remarkid == "park" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.rto }}
+                          {% if data.remarkid == "rto" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.adv }}
+                          {% if data.remarkid == "adv" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {{ data.loan }}
+                          {% if data.remarkid == "loan" and data.remark|length > 1 %}
+                            <small>({{ data.remark }})</small>
+                          {% endif %}
+                        </td>
                         <td>{{ data.total}}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
                     <tfoot>
                     <tr>
-                      <td colspan="5"></td>
-                      <th>TOTAL</th>
+                      {% if request.user.username != 'Fredy' %}
+                      <th colspan="6" style="text-align:center;">TOTAL</th>
+                      {% else %}
+                      <th colspan="4" style="text-align:center;">TOTAL</th>
+                      {% endif %}
+
                       <th>{{total.batta}}</th>
+                      <th>{{total.addbatta}}</th>
+                      <th>{{total.genbatta}}</th>
                       <th>{{total.lift}}</th>
                       <th>{{total.print}}</th>
                       <th>{{total.othexp}}</th>
+                      <th>{{total.tyrework}}</th>
                       <th>{{total.wei}}</th>
                       <th>{{total.halt}}</th>
                       <th>{{total.park}}</th>
@@ -170,11 +327,6 @@
                   </table>
                 </div>
               </div>
-              {% endif %}
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
               {% endif %}
             </div>
           </div>

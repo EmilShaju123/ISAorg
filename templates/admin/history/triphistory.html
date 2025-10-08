@@ -106,9 +106,9 @@
                                                     <button type="button" class="btn btn-primary">History</button>
                                                 </a>
                                             </td>
-                                            <td>{{data.trip.dat}}</td>
+                                            <td>{{data.trip.dat|date:'d-m-Y'}}</td>
                                             <td>{{data.trip.code}}</td>
-                                            <td>{{data.trip.code.feet}}</td>
+                                            <td>{{data.trip.feet}}</td>
                                             <td>{{data.trip.driver.driver}}</td>
                                             <td>{{data.trip.code.trans}}</td>
                                             <td>{{data.trip.party}}</td>

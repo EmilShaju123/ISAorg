@@ -27,29 +27,25 @@
                             {% endfor %}
                             {% endif %}
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="bno"><b>Bill No</b></label>
                                         <input type="number"  value="{{bill.bno}}" class="form-control" name="bno" id="bno" readonly/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="bdate"><b>Bill Date</b></label>
-                                        <input type="text" class="form-control" name="bdate" id="bdate" value="{{bdate|date:'Y-m-d'}}" readonly/>
+                                        <input type="text" class="form-control" name="bdate" id="bdate" value="{{bill.bdate|date:'Y-m-d'}}" readonly/>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="hdate"><b>Halt Date</b></label>
-                                        <input type="date" class="form-control" name="hdate" id="hdate" value='{{billdate }}'/>
+                                        <input type="date" class="form-control" name="hdate" id="hdate" value='{{billdate}}'/>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="diesel"><b>Diesel Advance</b></label>
                                         <input type="number" class="form-control" name="diesel" id="diesel" value="{{bill.diesel}}"/>
@@ -58,28 +54,25 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="hire"><b>Hire</b></label>
                                         <input type="number" class="form-control" name="hire" id="hire" value="{{bill.hire}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="hireqnt"><b>Hire Qnt</b></label>
                                         <input type="number" class="form-control" name="hireqnt" id="hireqnt" value="{{bill.hireqnt}}"/>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="halt"><b>Halting</b></label>
                                         <input type="number" class="form-control" name="halt" id="halt" value="{{bill.halt}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="haltqnt"><b>Halt Qnt</b></label>
                                         <input type="number" class="form-control" name="haltqnt" id="haltqnt" value="{{bill.haltqnt}}"/>
@@ -88,28 +81,25 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weigh"><b>Weighment</b></label>
                                         <input type="number" class="form-control"  name="weigh" id="weigh" value="{{bill.weigh}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weighqnt"><b>Weighment Qnt</b></label>
                                         <input type="number" class="form-control" name="weighqnt" id="weighqnt" value="{{bill.weighqnt}}"/>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="unload"><b>Unloading Charges</b></label>
                                         <input type="number" class="form-control" name="unload" id="unload" value="{{bill.unload}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="unloadqnt"><b>Unload Qnt</b></label>
                                         <input type="number" class="form-control" name="unloadqnt" id="unloadqnt" value="{{bill.unloadqnt}}"/>
@@ -118,28 +108,25 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="toll"><b>Toll</b></label>
                                         <input type="number" class="form-control" name="toll" id="toll" value="{{bill.toll}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="tollqnt"><b>Toll Qnt</b></label>
                                         <input type="number" class="form-control" name="tollqnt" id="tollqnt" value="{{bill.tollqnt}}"/>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="enblock"><b>Enblock Charges</b></label>
                                         <input type="number" class="form-control" name="enblock" id="enblock" value="{{bill.enblock}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="enblockqnt"><b>Enblock Qnt</b></label>
                                         <input type="number" class="form-control" name="enblockqnt" id="enblockqnt" value="{{bill.enblockqnt}}"/>
@@ -148,13 +135,13 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="shift"><b>Shifting</b></label>
                                         <input type="number" class="form-control" name="shift" id="shift" value="{{bill.shift}}"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="shiftqnt"><b>Shift Qnt</b></label>
                                         <input type="number" class="form-control" name="shiftqnt" id="shiftqnt" value="{{bill.shiftqnt}}"/>
@@ -165,7 +152,7 @@
                         </div>
                         <div class="card-action">
                             <button type="submit" name="update" class="btn btn-success">Update</button>
-                            <button type="submit" name="down" class="btn btn-primary">Download</button>
+                            <button type="submit" name="down" target="_blank" class="btn btn-primary">Download</button>
                         </div>
                     </div>
                 </div>

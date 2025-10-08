@@ -93,7 +93,7 @@
                                 <button type="button" class="btn btn-primary">History</button>
                             </a>
                         </td>
-                        <td>{{ data.date }}</td>
+                        <td>{{ data.date|date:"d-m-Y" }}</td>
                         <td>{{ data.code }}</td>
                         <td>{{ data.total}}</td>
                       </tr>

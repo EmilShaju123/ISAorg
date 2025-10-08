@@ -1,10 +1,211 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends base_template %}
+{% block content %}
+<form method="post" xmlns="http://www.w3.org/1999/html">
+    {% csrf_token %}
+    <style>
+        .table-container {
+        height: 300px; /* Set the height of the container */
+        }
+        table {
+    border-collapse: collapse;
+    table-layout: auto;
+    width: 100%;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f0f0f0;
+}
+
+tfoot {
+    position: sticky;
+    bottom: 0;
+    background-color: #f0f0f0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+
+        }
+    </style>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home"></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Monthly Profit</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="month"><b>Month <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="month" id="month" required>
+                                        <option value="">Select Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="year"><b>Year <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="year" id="year" required>
+                                        <option value="">Select Year</option>
+                                        {% for year in years %}
+                                        <option value="{{ year }}">{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="code"><b>Code <span style="color: red;">*</span></b></label>
+                                    <select class="form-control" name="code" id="code" required>
+                                        <option value="">Select Truck No</option>
+                                        {% for code in truck %}
+                                        <option value="{{ code.code }}">{{ code.truckno }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" name="ser1" class="btn btn-primary">
+                                Search &nbsp;
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                        <div class="card-header">
+                            <h3 class="fw-bold mb-3">Monthly Profit Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="height: 500px; overflow-y: auto;">
+                                <table class=" table table-striped ">
+                                    <tbody>
+                                        <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <td>{{code}}</td>
+                                        </tr>
+                                        </thead>
+                                        <tr>
+                                            <th>Month & Year</th>
+                                            <td>{{month}} , {{year}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hire</th>
+                                            <td>{{hire}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Fuel</th>
+                                            <td>{{fuel|floatformat:2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>OP KM - CL KM</th>
+                                            <td>{{opkm}} - {{clkm}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Adblue</th>
+                                            <td>{{adblue}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Batta</th>
+                                            <td>{{batta}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Salary</th>
+                                            <td>{{salary}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Repairs</th>
+                                            <td>{{repair}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>New Tyre</th>
+                                            <td>{{tyre}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Rethreads</th>
+                                            <td>{{rethread}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Toll</th>
+                                            <td>{{toll}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Parking</th>
+                                            <td>{{park}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>RTO</th>
+                                            <td>{{rto}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Insurance</th>
+                                            <td>{{insur}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax</th>
+                                            <td>{{tax}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Test Work</th>
+                                            <td>{{test}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loan</th>
+                                            <td>{{loan}}</td>
+                                        </tr>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Profit/Loss</th>
+                                            <td>
+                                                {% if profit < 0 %}
+                                                <span style="color: red"><b>{{ profit|floatformat:2 }}</b></span>
+                                                {% elif profit > 0 %}
+                                                <span style="color: green"><b>{{ profit|floatformat:2 }}</b></span>
+                                                {% else %}
+                                                <span style="color: black"><b>{{ profit|floatformat:2 }}</b></span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

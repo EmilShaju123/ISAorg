@@ -4,30 +4,35 @@
   <form method="post">
     {% csrf_token %}
     <style>
-        .table-container {
-        height: 300px; /* Set the height of the container */
-        }
-        table {
-            border-collapse: collapse;
-            table-layout: auto;
-            width: 100%;
-        }
-        thead {
-            position: sticky;
-            top: 0;
-            background-color: #f0f0f0;
-        }
-        tfoot {
-            position: sticky;
-            bottom: 0;
-            background-color: #f0f0f0;
+.table-container {
+  height: 300px; /* Set the height of the container */
+  overflow-y: auto; /* Add this to enable scrolling */
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+table {
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #f0f0f0;
+}
+
+tfoot {
+  position: sticky;
+  bottom: 0;
+  background-color: #f0f0f0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+</style>
     <div class="container">
       <div class="page-inner">
         <div class="page-header">
@@ -94,7 +99,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive" style="height: 600px; overflow-y: auto;">
-                  <table class="table table-striped">
+                  <table border="1">
                     <thead>
                       <tr>
                         <th>Sl No</th>
@@ -103,6 +108,7 @@
                         <th>Truck No</th>
                         <th>Tripsheet No</th>
                         <th>Batta</th>
+                        <th>Genzet Batta</th>
                         <th>Lift</th>
                         <th>Print</th>
                         <th>Other Exp</th>
@@ -119,11 +125,12 @@
                       {% for data in ser1 %}
                       <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ data.date }}</td>
+                        <td>{{ data.date|date:"d-m-Y" }}</td>
                         <td>{{ data.driver }}</td>
                         <td>{{ data.code }}</td>
                         <td>{{ data.sheetno }}</td>
                         <td>{{ data.batta }}</td>
+                        <td>{{ data.genbatta }}</td>
                         <td>{{ data.lift }}</td>
                         <td>{{ data.print }}</td>
                         <td>{{ data.othexp }}</td>
@@ -142,6 +149,7 @@
                       <td colspan="4"></td>
                       <th>TOTAL</th>
                       <th>{{total.batta}}</th>
+                      <th>{{total.genbatta}}</th>
                       <th>{{total.lift}}</th>
                       <th>{{total.print}}</th>
                       <th>{{total.othexp}}</th>

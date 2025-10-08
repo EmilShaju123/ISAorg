@@ -22,36 +22,80 @@
                 <div class="card">
                   <div class="card-header"></div>
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6 col-lg-4">
+                      <div class="row">
+                        <div class="col-md-6 col-lg-4">
                           <h3 class="fw-bold mb-3">Truck Registration</h3>
-                        <div class="form-group">
-                            <label for="code"><b>Truck No</b></label>
-                          <input type="text" class="form-control" name="code" id="code"/>
                         </div>
-                        <div class="form-group" >
-                            <label for="trans"><b>Transporter</b></label>
-                            <select class="form-control" name="trans"id="trans">
-                                {% for i in data %}
-                              <option>{{i.trans}}</option>
-                                {% endfor %}
-                            </select>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="code"><b>Truck No <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="code" id="code"
+                                    oninput="this.value = this.value.replace(/[\/\\]/g, '').replace(/\s+/g, '').toUpperCase()"
+                                    style="text-transform: uppercase" required/>
+                            </div>
                         </div>
-                          <div class="form-group" >
-                            <label for="driver"><b>Diver</b></label>
-                            <select class="form-control" name="driver"id="driver">
-                                {% for i in data1 %}
-                              <option>{{i.driver}}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="truckno"><b>Code <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="truckno" id="truckno" oninput="this.value = this.value
+                                .replace(/[\/\\]/g, '').replace(/\s+/g, '').toUpperCase()" required title="Input the truck's license plate number."/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label><b>Feet</b></label>
-                          <select name="feet" class="form-control">
-                            <option>20</option>
-                            <option>40</option>
-                          </select>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="trans"><b>Transporter <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="trans"id="trans" required>
+                                    {% for i in data %}
+                                    <option>{{i.trans}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Diver <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="driver"id="driver" required>
+                                    {% for i in data1 %}
+                                    <option>{{i.driver}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="feet"><b>Feet <span style="color: red;">*</span></b></label>
+                                <select name="feet" class="form-control" id="feet" required>
+                                    <option>20</option>
+                                    <option>40</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="emi"><b>EMI</b></label>
+                                <input type="number" name="emi" class="form-control" id="emi">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="tenure"><b>Tenure Date</b></label>
+                                <input type="date" name="tenure" class="form-control" id="tenure">
+                            </div>
+                          </div>
+                      </div>
+
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Submit</button>
                             <button type="reset" class="btn btn-danger">Cancel</button>
@@ -65,5 +109,22 @@
         </div>
     </div>
 </form>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('trans').addEventListener('change', function() {
+            var trans = this.value;
+            var driverSelect = document.getElementById('driver');
+            if (trans != 'ISA' && trans != 'ISA TRANS' && trans != 'THOLADANS') {
+                driverSelect.innerHTML = '<option>OTHER</option>';
+            } else {
+                driverSelect.innerHTML = '';
+                {% for i in data1 %}
+                driverSelect.innerHTML += '<option>{{i.driver}}</option>';
+                {% endfor %}
+            }
+        });
+        // trigger the change event manually to set the initial state
+        document.getElementById('trans').dispatchEvent(new Event('change'));
+    });
+</script>
 {% endblock %}

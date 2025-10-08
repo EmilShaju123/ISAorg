@@ -132,6 +132,12 @@
                         <span class="sub-item">Trip</span>
                       </a>
                     </li>
+                    <li>
+                      <a href="{% url 'battareg' %}">
+                        <span class="sub-item">Batta</span>
+                      </a>
+                    </li>
+
 
                   </ul>
                 </div>
@@ -218,6 +224,16 @@
                         <span class="sub-item">Expense</span>
                       </a>
                     </li>
+                   <li>
+                      <a href="{% url 'stafftruckview' %}">
+                        <span class="sub-item">Truck</span>
+                      </a>
+                    </li>
+                   <li>
+                      <a href="{% url 'detail' %}">
+                        <span class="sub-item">Details</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -238,6 +254,28 @@
                     <li>
                       <a href="{% url 'viewbill' %}">
                         <span class="sub-item">Bill View</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarLayoutssss">
+                  <i class="fas fa-chart-line"></i>
+                  <p>Profit/Loss</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="sidebarLayoutssss">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{% url 'isaprofit' %}">
+                        <span class="sub-item">Daily Report</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'monthprofit' %}">
+                        <span class="sub-item">Month Report</span>
                       </a>
                     </li>
                   </ul>

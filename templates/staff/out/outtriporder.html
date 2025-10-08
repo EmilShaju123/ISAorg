@@ -12,6 +12,11 @@
                 </li>
               </ul>
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
@@ -24,19 +29,21 @@
 
                       <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group" >
-                                <label for="code"><b>Code  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="code"id="code" required>
-                                    {% for i in d3 %}
-                                    <option>{{i.code}}</option>
-                                    {% endfor %}
-                                </select>
+                            <div class="form-group">
+                                <label for="code"><b>Code <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="code" id="code" list="codeList"
+                                       oninput="this.value = this.value.replace(/[\/\\]/g, '').toUpperCase()" style="text-transform: uppercase" required>
+                                <datalist id="codeList">
+                                {% for truck in d3 %}
+                                    <option value="{{ truck.code }}">{{ truck.code }}</option>
+                                {% endfor %}
+                                </datalist>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="dat"><b>Date  <span style="color: red;">*</span></b></label>
-                                <input type="date" class="form-control" name="dat" id="dat" required/>
+                                <input type="date" value="{{today}}" class="form-control" name="dat" id="dat" required/>
                             </div>
                         </div>
                       </div>
@@ -45,9 +52,9 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="party"><b>Party  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="party"id="party" required>
+                                <select class="form-control" name="party" id="party" required>
                                     {% for i in d2 %}
-                                    <option>{{i.party}}</option>
+                                    <option value="{{i.party}}">{{i.short}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -55,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="place"><b>Place  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="place"id="place" required>
+                                <select class="form-control" name="place" id="place" required>
                                     {% for i in d %}
                                     <option>{{i.place}}</option>
                                     {% endfor %}
@@ -66,15 +73,37 @@
 
                       <div class="row">
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="trans"><b>Transporter <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="trans" id="trans" list="transList" oninput="this.value = this.value.replace(/[\/\\]/g, '').toUpperCase()" required>
+                                <datalist id="transList">
+                                {% for t in trans %}
+                                 <option value="{{ t.trans }}">{{ t.trans }}</option>
+                                {% endfor %}
+                                </datalist>
+                            </div>
+                        </div>
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Driver</b></label>
+                                <select class="form-control" name="driver" id="driver">
+                                    <option>OTHER</option>
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="dis"><b>Diesel Advance</b></label>
-                                <input type="number" value="0" class="form-control" name="dis"id="dis" required>
+                                <input type="number" class="form-control" name="dis" id="dis">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="disqnt"><b>Diesel Qnt</b></label>
-                                <input type="number" value="0" class="form-control" step="0.01" name="disqnt"id="disqnt" required>
+                                <input type="number" class="form-control" step="0.01" name="disqnt" id="disqnt">
                             </div>
                         </div>
                       </div>
@@ -83,7 +112,7 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="trip"><b>Type  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="trip"id="trip" required>
+                                <select class="form-control" name="trip" id="trip" required>
                                     {% for i in d1 %}
                                     <option>{{i.trip}}</option>
                                     {% endfor %}
@@ -92,22 +121,26 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
-                                <label for="cont"><b>Container  <span style="color: red;">*</span></b></label>
-                                <input type="text" class="form-control" name="cont"id="cont" required>
+                                <label for="feet"><b>Feet</b></label>
+                                <select class="form-control" name="feet" id="feet">
+                                    <option>20</option>
+                                    <option>40</option>
+                                </select>
                             </div>
                         </div>
 
+                      </div>
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="hire"><b>Hire</b></label>
-                                <input type="number" value="0" class="form-control" name="hire"id="hire" required>
+                                <input type="number" class="form-control" name="hire" id="hire">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="halt"><b>Halt</b></label>
-                                <input type="number" value="0" class="form-control" name="halt"id="halt" required>
+                                <input type="number" class="form-control" name="halt" id="halt">
                             </div>
                         </div>
                       </div>
@@ -116,21 +149,28 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="buy"><b>Buy</b></label>
-                                <input type="number" value="0" class="form-control" name="buy"id="buy" required>
+                                <input type="number" class="form-control" name="buy" id="buy">
                             </div>
                         </div>
                           <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="outadv"><b>Outside Advance</b></label>
-                                <input type="number" value="0" class="form-control" name="outadv"id="outadv" required>
+                                <input type="number" class="form-control" name="outadv" id="outadv">
                             </div>
                         </div>
                       </div>
                       <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="cont"><b>Container </b></label>
+                                <input type="text" class="form-control" name="cont" id="cont"
+                                       oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')">
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="bno"><b>Bill No</b></label>
-                                <input type="number" value="0" class="form-control" name="bno"id="bno" required>
+                                <input type="number" class="form-control" name="bno" id="bno">
                             </div>
                         </div>
                       </div>
@@ -155,5 +195,35 @@
         </div>
     </div>
 </form>
+<script>
+    const trucks = [
+        {% for truck in d3 %}
+            {
+                code: "{{ truck.code }}",
+                trans: "{{ truck.trans }}",
+                feet: "{{ truck.feet }}"
+            },
+        {% endfor %}
+    ];
 
+    const codeInput = document.getElementById('code');
+    const transInput = document.getElementById('trans');
+    const feetSelect = document.getElementById('feet');
+
+    codeInput.addEventListener('input', function() {
+        const selectedCode = codeInput.value;
+        const truck = trucks.find(truck => truck.code === selectedCode);
+        if (truck) {
+            transInput.value = truck.trans;
+            Array.from(feetSelect.options).forEach(option => {
+                if (option.text === truck.feet) {
+                    option.selected = true;
+                }
+            });
+        } else {
+            transInput.value = '';
+            feetSelect.selectedIndex = 0;
+        }
+    });
+</script>
 {% endblock %}

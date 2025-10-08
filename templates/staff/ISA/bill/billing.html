@@ -39,7 +39,7 @@
                         <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ trip.code }}</td>
-                          <td>{{ trip.dat }}</td>
+                          <td>{{ trip.dat|date:"d-m-Y" }}</td>
                           <td>{{ trip.party }}</td>
                           <td>{{ trip.place }}</td>
                           <td>{{ trip.trip }}</td>

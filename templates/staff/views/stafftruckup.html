@@ -1,0 +1,87 @@
+{% extends base_template %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <ul class="breadcrumbs mb-3">
+            <li class="nav-home"></li>
+            <li class="separator"><i class="icon-arrow-right"></i></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="fw-bold mb-3">Update Truck</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="code"><b>Truck No</b></label>
+                    <input type="text" readonly class="form-control" value="{{code.code}}" name="code" id="code" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="trans"><b>Transporter</b></label>
+                    <select  class="form-control" name="trans" id="trans">
+                        <option>{{code.trans}}</option>
+                        {% for trans in trans %}
+                            <option>{{trans.trans}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group" >
+                          <label for="driver"><b>Driver</b></label>
+                          <select class="form-control" name="driver"id="driver">
+                              <option>{{code.driver}}</option>
+                              {% for driver in driver %}
+                              <option >{{driver.driver}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="feet"><b>Feet</b></label>
+                        <select class="form-control" name="feet" id="feet">
+                          <option> {{code.feet}}</option>
+                          <option>20</option>
+                          <option>40</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="emi"><b>Emi</b></label>
+                    <input type="number" class="form-control" value="{{code.emi}}" name="emi" id="emi" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="tenure"><b>Tenure</b></label>
+                    <input type="date" class="form-control" value="{{ code.tenure|date:'Y-m-d' }}" name="tenure" id="tenure" />
+                  </div>
+                </div>
+              </div>
+                  <div class="card-action">
+                    <button type="submit" name="ser1" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

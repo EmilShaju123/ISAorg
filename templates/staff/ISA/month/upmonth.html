@@ -1,10 +1,477 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'staffindex.html' %}
+
+{% block content %}
+  <style>
+    .table-container {
+      height: 300px; /* Set the height of the container */
+    }
+    table {
+      border-collapse: collapse;
+      width: 45%; /* Make the tables 45% wide */
+      float: left; /* Make the tables float next to each other */
+      margin: 10px; /* Add some margin between the tables */
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: #f0f0f0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <div class="container">
+    <div class="page-inner">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Adblue</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Adblue</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for adblue in adblue %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'adblueup' adblue.id %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'adbluedel' adblue.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ adblue.date|date:"d-m-Y" }}</td>
+                        <td>{{ adblue.code }}</td>
+                        <td>{{ adblue.adblue }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No Adblue found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Test Work</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Test work</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for test in test %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'testup'  test.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'testdel' test.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ test.date|date:"d-m-Y" }}</td>
+                        <td>{{ test.code }}</td>
+                        <td>{{test.test}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No Test work found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Rethread</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Rethread</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rethread in rethread %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'rethreadup' rethread.id %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'rethreaddel' rethread.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ rethread.date|date:"d-m-Y" }}</td>
+                        <td>{{ rethread.code }}</td>
+                        <td>{{ rethread.rethread }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No Rethread found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">New Tyre</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Tyre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for tyre in tyre %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'tyreup'  tyre.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'tyredel' tyre.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ tyre.date|date:"d-m-Y" }}</td>
+                        <td>{{ tyre.code }}</td>
+                        <td>{{tyre.tyre}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No New tyre found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Loan</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Loan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for loan in loan %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'loanup' loan.id %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'loandel' loan.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ loan.date |date:"d-m-Y"}}</td>
+                        <td>{{ loan.code }}</td>
+                        <td>{{ loan.loan }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No loan found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Insurance</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Insurance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for insur in insur %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'insurup'  insur.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'insurdel' insur.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ insur.date|date:"d-m-Y" }}</td>
+                        <td>{{ insur.code }}</td>
+                        <td>{{insur.insur}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No Insurance found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">RTO</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>RTO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rto in rto %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'rtoup' rto.id %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" name="rto">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'rtodel' rto.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ rto.date|date:"d-m-Y" }}</td>
+                        <td>{{ rto.code }}</td>
+                        <td>{{ rto.rto }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No RTO found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Toll</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Toll</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for toll in toll %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'tollup'  toll.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'tolldel' toll.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ toll.date|date:"d-m-Y" }}</td>
+                        <td>{{ toll.code }}</td>
+                        <td>{{toll.toll}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No toll found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Tax</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2" style="text-align:center">Action</th>
+                      <th>Date</th>
+                      <th>Code</th>
+                      <th>Tax</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for tax in tax %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'taxup'  tax.id %}">
+                            <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="{% url 'taxdel' tax.id %}">
+                              <button type="button" class="btn btn-link btn-danger">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                          </a>
+                        </td>
+                        <td>{{ tax.date|date:"d-m-Y" }}</td>
+                        <td>{{ tax.code }}</td>
+                        <td>{{tax.tax}}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No tax found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

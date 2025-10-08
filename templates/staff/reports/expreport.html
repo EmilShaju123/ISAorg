@@ -23,7 +23,7 @@
     <tbody>
         {% for data in ser1 %}
         <tr>
-            <td>{{ data.date }}</td>
+            <td>{{ data.date|date:"d-m-Y" }}</td>
             <td>{{ data.code }}</td>
             <td>{{ data.roro }}</td>
             <td>{{ data.adblue }}</td>

@@ -20,9 +20,9 @@
     <tbody>
         {% for data in trip %}
         <tr>
-            <td>{{data.trip.dat}}</td>
+            <td>{{data.trip.dat|date:"d-m-Y"}}</td>
             <td>{{data.trip.code}}</td>
-            <td>{{data.trip.code.feet}}</td>
+            <td>{{data.trip.feet}}</td>
             <td>{{data.trip.driver.driver}}</td>
             <td>{{data.trip.code.trans}}</td>
             <td>{{data.trip.party}}</td>
@@ -49,7 +49,7 @@
             <td>TOTAL</td>
             <td>{{hire}}</td>
             <td>{{halt}}</td>
-            <td>{{diesel}}</td>
+            <td>{{ diesel|floatformat:2 }}</td>
         </tr>
         <tr>
             <td></td>

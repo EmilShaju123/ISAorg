@@ -1,0 +1,105 @@
+<table border="1">
+    <tbody>
+    <thead>
+    <tr>
+        <td>Code</td>
+        <td>Hire</td>
+        <td>Fuel</td>
+        <td>Fuel Qnt</td>
+        <td>Adblue</td>
+        <td>OP KM - CL KM</td>
+        <td>Con</td>
+        <td>Mileage</td>
+        <td>Batta Total</td>
+        <td>Salary</td>
+        <td>Repairs</td>
+        <td>New Tyre</td>
+        <td>Rethreads</td>
+        <td>Toll</td>
+        <td>Parking</td>
+        <td>Expense Total</td>
+        <td>RTO</td>
+        <td>Welfare</td>
+        <td>Tax KL</td>
+        <td>Tax KA</td>
+        <td>Tax TN</td>
+        <td>Insurance</td>
+        <td>Test Work</td>
+        <td>Loan</td>
+        <td>Profit/Loss</td>
+    </tr>
+    </thead>
+    {% for code, values in data.items %}
+    <tr>
+        <td>{{ code }}</td>
+        <td>{{ values.total_hire }}</td>
+        <td>{{ values.total_dis|floatformat:2 }}</td>
+        <td>{{ values.total_disqnt|floatformat:2 }}</td>
+        <td>{{ values.total_adblue }}</td>
+        <td>{{ values.first_opkm}}-{{ values.last_clkm }}</td>
+        <td>{{ values.con }}</td>
+        <td>{{ values.mileage|floatformat:2 }}</td>
+        <td>{{ values.total_batta }}</td>
+        <td>{{ values.total_salary }}</td>
+        <td>{{ values.total_repair }}</td>
+        <td>{{ values.total_tyre }}</td>
+        <td>{{ values.total_rethread }}</td>
+        <td>{{ values.total_toll }}</td>
+        <td>{{ values.total_park }}</td>
+        <td>{{ values.total_exp }}</td>
+        <td>{{ values.total_rto }}</td>
+        <td>{{ values.total_welfare }}</td>
+        <td>{{ values.total_tax }}</td>
+        <td>{{ values.total_taxk }}</td>
+        <td>{{ values.total_taxtn }}</td>
+        <td>{{ values.total_insur }}</td>
+        <td>{{ values.total_test }}</td>
+        <td>{{ values.total_emi }}</td>
+        <td>
+            {% if values.total_profit > 0 %}
+            <span style="color: green;"><b>{{values.total_profit|floatformat:2}}</b></span>
+            {% elif values.total_profit < 0 %}
+            <span style="color: red;"><b>{{values.total_profit|floatformat:2}}</b></span>
+            {% else %}
+            <span style="color: black;"><b>{{values.total_profit|floatformat:2}}</b></span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    <tfoot>
+        <tr>
+            <td>Grand Total</td>
+            <td>{{total.hire}}</td>
+            <td>{{total.dis|floatformat:2}}</td>
+            <td></td>
+            <td>{{total.adblue}}</td>
+            <td></td><td></td><td></td>
+            <td>{{total.batta}}</td>
+            <td>{{total.salary}}</td>
+            <td>{{total.repair}}</td>
+            <td>{{total.tyre}}</td>
+            <td>{{total.rethread}}</td>
+            <td>{{total.toll}}</td>
+            <td>{{total.park}}</td>
+            <td>{{total.exp}}</td>
+            <td>{{total.rto}}</td>
+            <td>{{total.welfare}}</td>
+            <td>{{total.tax}}</td>
+            <td>{{total.taxk}}</td>
+            <td>{{total.taxtn}}</td>
+            <td>{{total.insur}}</td>
+            <td>{{total.test}}</td>
+            <td>{{total.emi}}</td>
+            <td>
+                {% if total.profit > 0 %}
+                <span style="color: green;"><b>{{total.profit|floatformat:2}}</b></span>
+                {% elif total.profit < 0 %}
+                <span style="color: red;"><b>{{total.profit|floatformat:2}}</b></span>
+                {% else %}
+                <span style="color: black;"><b>{{total.profit|floatformat:2}}</b></span>
+                {% endif %}
+            </td>
+        </tr>
+</tfoot>
+    </tbody>
+</table>

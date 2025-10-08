@@ -1,0 +1,123 @@
+{% extends base_template %}
+
+{% block content %}
+  <style>
+    .table-container {
+      height: 300px; /* Set the height of the container */
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: #f0f0f0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">ISA Trucks</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>Sl No</th>
+                      <th>Truck Number</th>
+                      <th>Transporter</th>
+                      <th>Feet</th>
+                      <th>Driver</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for isa_truck in trucks %}
+                      <tr>
+                        <td>
+                          {% if isa_truck.code %}
+                            <a href="{% url 'stafftruckup' isa_truck.code %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                            </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ isa_truck.code }}</td>
+                        <td>{{ isa_truck.trans }}</td>
+                        <td>{{ isa_truck.feet }}</td>
+                        <td>{{ isa_truck.driver }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No ISA trucks found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="fw-bold mb-3">Outside Trucks</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>Sl No</th>
+                      <th>Truck Number</th>
+                      <th>Transporter</th>
+                      <th>Feet</th>
+                      <th>Driver</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for outside_truck in outtruck %}
+                      <tr>
+                        <td>
+                          {% if outside_truck.code %}
+                            <a href="{% url 'truckup' outside_truck.code %}">
+                              <button type="button" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                            </a>
+                          {% endif %}
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ outside_truck.code }}</td>
+                        <td>{{ outside_truck.trans }}</td>
+                        <td>{{ outside_truck.feet }}</td>
+                        <td>{{ outside_truck.driver }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="5">No outside trucks found.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

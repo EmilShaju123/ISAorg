@@ -32,34 +32,91 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date"><b>Date</b></label>
-                                        <input type="date" readonly class="form-control" value="{{code.dat}}" name="date" id="date" />
+                                        <input type="date" class="form-control" value="{{code.dat|date:'Y-m-d'}}" name="dat" id="date" />
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Driver</b></label>
+                                <select class="form-control" name="driver" id="driver">
+                                    <option>{{code.driver}}</option>
+                                    {% for i in driver %}
+                                    <option>{{i.driver}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="feet"><b>Feet</b></label>
+                                <select class="form-control" name="feet" id="feet">
+                                    <option>{{code.feet}}</option>
+                                    <option>20</option>
+                                    <option>40</option>
+                                    <option>2X20</option>
+                                    <option>3X20</option>
+                                    <option>4X20</option>
+                                    <option>5X20</option>
+                                    <option>6X20</option>
+                                    <option>7X20</option>
+                                    <option>8X20</option>
+                                    <option>9X20</option>
+                                    <option>10X20</option>
+                                    <option>11X20</option>
+                                    <option>12X20</option>
+                                    <option>2X40</option>
+                                    <option>3X40</option>
+                                    <option>4X40</option>
+                                    <option>5X40</option>
+                                    <option>6X40</option>
+                                    <option>7X40</option>
+                                    <option>8X40</option>
+                                    <option>9X40</option>
+                                    <option>10X40</option>
+                                    <option>11X40</option>
+                                    <option>12X40</option>
+                                    <option>13X40</option>
+                                    <option>14X40</option>
+                                    <option>15X40</option>
+                                    <option>16X40</option>
+                                    <option>17X40</option>
+                                    <option>18X40</option>
+                                    <option>19X40</option>
+                                    <option>20X40</option>
+                                    <option>20R</option>
+                                    <option>40R</option>
+                                    <option>2X20R</option>
+                                </select>
+                            </div>
+                        </div>
+                      </div>
 
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="party"><b>Party</b></label>
                                 <select class="form-control" name="party"id="party">
-                                    <option>{{code.party}}</option>
+                                    <option value="{{code.party}}">{{code.party.short}}</option>
                                     {% for i in party %}
-                                    <option>{{i.party}}</option>
+                                    <option value="{{i.party}}">{{i.short}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group" >
-                                <label for="place"><b>Place</b></label>
-                                <select class="form-control" name="place"id="place">
-                                    <option>{{code.place}}</option>
-                                    {% for i in place %}
-                                    <option>{{i.place}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
+        <div class="form-group" >
+            <label for="place"><b>Place</b></label>
+            <select class="form-control" name="place" id="place" onchange="checkPlace()">
+                <option>{{code.place}}</option>
+                {% for i in place %}
+                <option>{{i.place}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
                       </div>
 
                       <div class="row">
@@ -81,7 +138,7 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="trip"><b>Type</b></label>
-                                <select class="form-control" name="trip"id="trip">
+                                <select class="form-control" name="trip"id="trip" onchange="checkTrip()">
                                     <option>{{code.trip}}</option>
                                     {% for i in type %}
                                     <option>{{i.trip}}</option>
@@ -111,6 +168,21 @@
                             </div>
                           </div>
                       </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="batta"><b>Batta</b></label>
+                                <input type="number" value="{{code.batta}}" class="form-control"  name="batta" id="batta">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="bno"><b>Bill No</b></label>
+                                <input type="number" value="{{code.bno}}" class="form-control"  name="bno" id="bno">
+                            </div>
+                          </div>
+                      </div>
                       <div class="card-action">
                             <div class="row">
                             <div class="col-md-2">
@@ -118,7 +190,6 @@
                                     <button type="submit" name="update" class="btn btn-success">Update</button>
                                 </div>
                             </div>
-
                           </div>
                       </div>
                   </div>
@@ -128,5 +199,41 @@
         </div>
     </div>
 </form>
+
+<script>
+    function checkPlace() {
+        var place = document.getElementById("place").value;
+        var batta = document.getElementById("batta");
+        if (place != 'SAME' && place != 'NO WORK') {
+            batta.readOnly = true;
+        } else {
+            batta.readOnly = false;
+        }
+    }
+
+    function checkTrip() {
+        var trip = document.getElementById("trip").value;
+        var hire = document.getElementById("hire");
+        if (trip == 'SAME\\HALT') {
+            hire.readOnly = true;
+        } else {
+            hire.readOnly = false;
+        }
+    }
+
+    // Call the functions on page load to set the initial state
+    window.onload = function() {
+        checkPlace();
+        checkTrip();
+    }
+
+    // Call the functions when the place and trip types are changed
+    document.getElementById("place").onchange = function() {
+        checkPlace();
+    }
+    document.getElementById("trip").onchange = function() {
+        checkTrip();
+    }
+</script>
 
 {% endblock %}

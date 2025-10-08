@@ -124,7 +124,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="{% url 'detail' %}">
+                      <a href="{% url 'detail' %}?index_type=admin_index">
                         <span class="sub-item">Details</span>
                       </a>
                     </li>
@@ -161,14 +161,14 @@
               </li>
 
               <li class="nav-item">
-                <a href="{% url 'battaview' %}">
+                <a href="{% url 'battaupdate' %}?index_type=admin_index">
                   <i class="fas fa-hand-holding-usd"></i>
                   <p>Batta</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{% url 'expenseview' %}">
+                <a href="{% url 'expenseupdate' %}?index_type=admin_index">
                   <i class="fas fa-wallet"></i>
                   <p>Expense</p>
                 </a>
@@ -182,10 +182,25 @@
               </li>
 
               <li class="nav-item">
-                <a href="{% url 'isaprofit' %}">
+                <a data-bs-toggle="collapse" href="#sidebarLayoutssss">
                   <i class="fas fa-chart-line"></i>
                   <p>Profit/Loss</p>
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="sidebarLayoutssss">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{% url 'isaprofit' %}?index_type=admin_index">
+                        <span class="sub-item">Daily Data</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'monthprofit' %}?index_type=admin_index">
+                        <span class="sub-item">Month Data</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
               <li class="nav-item">
@@ -216,6 +231,7 @@
                         <span class="sub-item">Bill</span>
                       </a>
                     </li>
+
                     <li>
                       <a data-bs-toggle="collapse" href="#subnav1">
                         <span class="sub-item">Deleted Data</span>

@@ -60,7 +60,7 @@
                                     <select class="form-control" name="code" id="code">
                                         <option>----------------------------------Select---------------------------------------</option>
                                         {% for code in code %}
-                                        <option>{{ code.code}}</option>
+                                        <option value="{{code.code}}">{{ code.truckno}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -97,8 +97,8 @@
 
                                         <tr>
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{data.trip.dat}}</td>
-                                            <td>{{data.trip.code}}</td>
+                                            <td>{{data.trip.dat|date:'d-m-Y'}}</td>
+                                            <td>{{data.trip.code.truckno}}</td>
                                             <td>{{data.trip.opkm}}</td>
                                             <td>{{data.trip.clkm}}</td>
                                             <td>{{data.distance}}</td>

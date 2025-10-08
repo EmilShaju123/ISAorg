@@ -31,7 +31,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date"><b>Date</b></label>
-                                        <input type="date" readonly class="form-control" value="{{code.dat}}" name="date" id="date" />
+                                        <input type="text" readonly class="form-control" value="{{code.dat|date:'d-m-Y'}}" name="date" id="date" />
                                     </div>
                                 </div>
                             </div>
@@ -70,8 +70,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
-                                <label for="disqnt"><b>Diesel Qnt</b></label>
-                                <input type="number" value="{{code.disqnt}}"class="form-control" step="0.01" name="disqnt"id="disqnt">
+                                <label for="bno"><b>Bill No</b></label>
+                                <input type="number" value="{{code.bno}}"class="form-control" name="bno"id="bno">
                             </div>
                         </div>
                       </div>

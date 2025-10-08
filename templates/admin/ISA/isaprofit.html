@@ -1,4 +1,4 @@
-{% extends 'adminindex.html' %}
+{% extends base_template %}
 
 {% block content %}
 <form method="post">
@@ -65,7 +65,7 @@
                                     <select class="form-control" name="code" id="code">
                                         <option>----------------------------------Select---------------------------------------</option>
                                         {% for code in code %}
-                                        <option>{{ code.code}}</option>
+                                        <option value="{{ code.code}}">{{ code.truckno}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="height: 550px; overflow-y: auto;">
-                                <table class=" table table-striped ">
+                                <table border="1">
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
@@ -102,8 +102,8 @@
                                         {% for data in ser1 %}
                                         <tr>
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{data.trip.dat}}</td>
-                                            <td>{{data.trip.code}}</td>
+                                            <td>{{data.trip.dat|date:'d-m-Y'}}</td>
+                                            <td>{{data.trip.code.truckno}}</td>
                                             <td>{{data.bill}}</td>
                                             <td>{{data.trip.dis}}</td>
                                             <td>{{data.trip.amount}}</td>
@@ -111,11 +111,11 @@
                                             <td>{{data.trip.com}}</td>
                                             <td><b>
                                                 {% if data.profit > 0 %}
-                                                    <span style="color: green;">{{data.profit}}</span>
+                                                    <span style="color: green;">{{data.profit|floatformat:2}}</span>
                                                 {% elif data.profit < 0 %}
-                                                    <span style="color: red;">{{data.profit}}</span>
+                                                    <span style="color: red;">{{data.profit|floatformat:2}}</span>
                                                 {% else %}
-                                                    <span style="color: black;">{{data.profit}}</span>
+                                                    <span style="color: black;">{{data.profit|floatformat:2}}</span>
                                                 {% endif %}
                                             </b></td>
                                         </tr>

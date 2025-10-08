@@ -29,21 +29,119 @@
                       </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="codes"><b>Truck No</b></label>
+                                <select class="form-control" name="codes" id="codes">
+                                    {% for code in d3 %}
+                                    <option value="{{code.code}}">{{ code.truckno}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="ser" class="btn btn-success">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                    {% if trip %}
+                    <div class="card-header">
+                        <h3 class="fw-bold mb-3">Trip Details</h3>
+                    </div>
+                    <div class="card-body">
+
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="code"><b>Code  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="code"id="code">
-                                    {% for i in d3 %}
-                                    <option>{{i.code}}</option>
+                                <input class="form-control" name="code"id="code" value="{{trip.code}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dats"><b>Last Trip Date  <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" value="{{ trip.dat }}" name="dats" id="dats" readonly/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dat"><b>Date  <span style="color: red;">*</span></b></label>
+                                <input type="date" class="form-control" value="{{ today }}" name="dat" id="dat" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pl"><b>Place  <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" value="{{ place }}" name="pl" id="pl" readonly/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="driver"><b>Driver <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="driver" id="driver">
+                                <!-- options will be populated dynamically -->
+                                    <option>{{trip.driver}}</option>
+                                    {% for i in driver %}
+                                    <option>{{i.driver}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="dat"><b>Date  <span style="color: red;">*</span></b></label>
-                                <input type="date" class="form-control" name="dat" id="dat" required/>
+                            <div class="form-group" >
+                                <label for="feet"><b>Feet <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="feet" id="feet">
+                                    <option>{{trip.feet}}</option>
+                                    <option>20</option>
+                                    <option>40</option>
+                                    <option>2X20</option>
+                                    <option>3X20</option>
+                                    <option>4X20</option>
+                                    <option>5X20</option>
+                                    <option>6X20</option>
+                                    <option>7X20</option>
+                                    <option>8X20</option>
+                                    <option>9X20</option>
+                                    <option>10X20</option>
+                                    <option>11X20</option>
+                                    <option>12X20</option>
+                                    <option>2X40</option>
+                                    <option>3X40</option>
+                                    <option>4X40</option>
+                                    <option>5X40</option>
+                                    <option>6X40</option>
+                                    <option>7X40</option>
+                                    <option>8X40</option>
+                                    <option>9X40</option>
+                                    <option>10X40</option>
+                                    <option>11X40</option>
+                                    <option>12X40</option>
+                                    <option>13X40</option>
+                                    <option>14X40</option>
+                                    <option>15X40</option>
+                                    <option>16X40</option>
+                                    <option>17X40</option>
+                                    <option>18X40</option>
+                                    <option>19X40</option>
+                                    <option>20X40</option>
+                                    <option>20R</option>
+                                    <option>40R</option>
+                                    <option>2X20R</option>
+                                </select>
                             </div>
                         </div>
                       </div>
@@ -52,9 +150,10 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="party"><b>Party  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="party"id="party" required>
+                                <select class="form-control" name="party" id="party" required>
+                                    <option value="{{ trip.party }}">{{trip.party.short}}</option>
                                     {% for i in d2 %}
-                                    <option>{{i.party}}</option>
+                                    <option value="{{ i.party }}">{{i.short}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -62,7 +161,8 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="place"><b>Place  <span style="color: red;">*</span></b></label>
-                                <select class="form-control" name="place"id="place" required>
+                                <select class="form-control" name="place" id="place" required>
+                                    <option>{{trip.place}}</option>
                                     {% for i in d %}
                                     <option>{{i.place}}</option>
                                     {% endfor %}
@@ -75,13 +175,13 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="dis"><b>Diesel Advance </b></label>
-                                <input type="number" value="0" class="form-control" step="0.01" name="dis"id="dis" required>
+                                <input type="number" class="form-control" step="0.01" name="dis"id="dis">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="disqnt"><b>Diesel Qnt</b></label>
-                                <input type="number" value="0" class="form-control" step="0.01" name="disqnt"id="disqnt">
+                                <input type="number" class="form-control" step="0.01" name="disqnt"id="disqnt">
                             </div>
                         </div>
                       </div>
@@ -91,6 +191,7 @@
                             <div class="form-group" >
                                 <label for="trip"><b>Type  <span style="color: red;">*</span></b></label>
                                 <select class="form-control" name="trip"id="trip" required>
+                                    <option>{{trip.trip}}</option>
                                     {% for i in d1 %}
                                     <option>{{i.trip}}</option>
                                     {% endfor %}
@@ -100,7 +201,7 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="bno"><b>Bill No</b></label>
-                                <input type="number" value="0" class="form-control" name="bno"id="bno" required>
+                                <input type="number" class="form-control" name="bno"id="bno">
                             </div>
                         </div>
                       </div>
@@ -109,13 +210,13 @@
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="hire"><b>Hire </b></label>
-                                <input type="number" value="0" class="form-control" name="hire"id="hire" required>
+                                <input type="number" class="form-control" name="hire"id="hire">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="halt"><b>Halt</b></label>
-                                <input type="number" value="0" class="form-control" name="halt"id="halt" required>
+                                <input type="number" class="form-control" name="halt"id="halt">
                             </div>
                         </div>
                       </div>
@@ -123,23 +224,24 @@
                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" >
-                                <label for="cont"><b>Container  <span style="color: red;">*</span></b></label>
-                                <input type="text" class="form-control" name="cont"id="cont" required>
+                                <label for="cont"><b>Container </b></label>
+                                <input type="text" class="form-control" name="cont" id="cont"
+                                       oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" >
                                 <label for="com"><b>Commission</b></label>
-                                <input type="number" value="0" class="form-control" name="com"id="com" required>
+                                <input type="number" class="form-control" name="com"id="com">
                             </div>
                         </div>
                       </div>
 
                       <div class="card-action">
-                            <div class="row">
+                          <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group" >
-                                    <button type="submit" name="bill" class="btn btn-success">Submit</button>
+                                    <button type="submit" name="reg" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -149,8 +251,177 @@
                             </div>
                           </div>
                       </div>
+                    </div>
+                    {% endif %}
+                    {% if trips %}
+                    <div class="card-header">
+                        <h3 class="fw-bold mb-3">Trip Details</h3>
+                    </div>
+                    <div class="card-body">
 
-                  </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="codess"><b>Code  <span style="color: red;">*</span></b></label>
+                                <input class="form-control" name="code" id="codess" value="{{trips.code}}" readonly>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date"><b>Date  <span style="color: red;">*</span></b></label>
+                                <input type="date" class="form-control" value="{{ today }}" name="dat" id="date" required/>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="drivers"><b>Driver <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="driver" id="drivers">
+                                    <option>{{trips.driver}}</option>
+                                    {% for i in driver %}
+                                    <option>{{i.driver}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="feets"><b>Feet <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="feet" id="feets">
+                                    <option>{{trips.feet}}</option>
+                                    <option>20</option>
+                                    <option>40</option>
+                                    <option>2X20</option>
+                                    <option>3X20</option>
+                                    <option>4X20</option>
+                                    <option>5X20</option>
+                                    <option>6X20</option>
+                                    <option>7X20</option>
+                                    <option>8X20</option>
+                                    <option>9X20</option>
+                                    <option>10X20</option>
+                                    <option>11X20</option>
+                                    <option>12X20</option>
+                                    <option>2X40</option>
+                                    <option>3X40</option>
+                                    <option>4X40</option>
+                                    <option>5X40</option>
+                                    <option>6X40</option>
+                                    <option>20R</option>
+                                    <option>40R</option>
+                                    <option>2X20R</option>
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="partys"><b>Party  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="party" id="partys" required>
+                                    {% for i in d2 %}
+                                    <option value="{{i.party}}">{{i.short}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="places"><b>Place  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="place" id="places" required>
+                                    {% for i in d %}
+                                    <option>{{i.place}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="diss"><b>Diesel Advance </b></label>
+                                <input type="number" class="form-control" step="0.01" name="dis" id="diss">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="disqnts"><b>Diesel Qnt</b></label>
+                                <input type="number" class="form-control" step="0.01" name="disqnt" id="disqnts">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="trips"><b>Type  <span style="color: red;">*</span></b></label>
+                                <select class="form-control" name="trip" id="trips" required>
+                                    {% for i in d1 %}
+                                    <option>{{i.trip}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="bnos"><b>Bill No</b></label>
+                                <input type="number" class="form-control" name="bno" id="bnos">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="hires"><b>Hire </b></label>
+                                <input type="number" class="form-control" name="hire" id="hires" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="halts"><b>Halt</b></label>
+                                <input type="number" class="form-control" name="halt" id="halts" >
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="conts"><b>Container  <span style="color: red;">*</span></b></label>
+                                <input type="text" class="form-control" name="cont" id="conts"
+                                       oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                                <label for="coms"><b>Commission</b></label>
+                                <input type="number" class="form-control" name="com" id="coms">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="card-action">
+                          <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="submit" name="reg" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" >
+                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    {% endif %}
                 </div>
               </div>
             </div>

@@ -80,7 +80,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbisa',
+        'NAME': 'isatranss$default',
         'USER': 'root',
         'PASSWORD': 'Emil@123',
         'HOST': '127.0.0.1',  # or the hostname where your MySQL server is running
@@ -123,8 +123,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR=os.path.join(BASE_DIR,"static")
-STATICFILES_DIRS=[STATIC_DIR,]
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [
+    STATIC_DIR,
+    os.path.join(BASE_DIR, 'static'),  # Replace 'myapp' with your app name
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
